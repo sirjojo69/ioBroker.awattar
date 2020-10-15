@@ -1,0 +1,95 @@
+{
+    "common": {
+        "name": "awattar",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "aWATTar",
+        "titleLang": {
+            "en": "aWATTar",
+            "de": "aWATTar",
+            "ru": "Аваттар",
+            "pt": "aWATTar",
+            "nl": "aWATTar",
+            "fr": "aWATTar",
+            "it": "aWATTar",
+            "es": "aWATTar",
+            "pl": "Awattar",
+            "zh-cn": "阿瓦塔"
+        },
+        "desc": {
+            "en": "reads out hourly prices from aWATTar",
+            "de": "liest Stundenpreise von der aWATTar Website",
+            "ru": "считывает почасовые цены из aWATTar",
+            "pt": "lê os preços por hora de aWATTar",
+            "nl": "leest uurtarieven van aWATTar voor",
+            "fr": "lit les prix horaires d'aWATTar",
+            "it": "legge i prezzi orari da aWATTar",
+            "es": "lee los precios por hora de aWATTar",
+            "pl": "odczytuje ceny godzinowe z aWATTar",
+            "zh-cn": "从aWATTar读出每小时价格"
+        },
+        "authors": [
+            "SirJojo69 <gtj.howe@gmx.de>"
+        ],
+        "keywords": [
+            "PV",
+            "aWATTAR"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "awattar.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/sirjojo69/ioBroker.awattar/master/admin/awattar.png",
+        "readme": "https://github.com/sirjojo69/ioBroker.awattar/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "utility",
+        "compact": true,
+        "connectionType": "cloud",
+        "dataSource": "poll",
+        "materialize": true,
+        "materializeTab": true,
+        "adminTab": {
+            "singleton": true,
+            "name": {
+                "en": "aWATTar",
+                "de": "aWATTar",
+                "ru": "Аваттар",
+                "pt": "aWATTar",
+                "nl": "aWATTar",
+                "fr": "aWATTar",
+                "it": "aWATTar",
+                "es": "aWATTar",
+                "pl": "aWATTar",
+                "zh-cn": "阿瓦塔"
+            },
+            "link": "",
+            "fa-icon": "info"
+        },
+        "supportCustoms": true,
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0"
+            }
+        ]
+    },
+    "native": {
+        "Marketdata URL": "https://api.awattar.de/v1/marketdata"
+    },
+    "objects": [],
+    "instanceObjects": []
+}

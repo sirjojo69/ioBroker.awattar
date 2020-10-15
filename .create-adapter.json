@@ -1,0 +1,40 @@
+{
+    "cli": true,
+    "adapterName": "awattar",
+    "title": "Awattar",
+    "description": "reads out hourly prices from aWATTar",
+    "keywords": [
+        "PV",
+        "aWATTAR"
+    ],
+    "expert": "yes",
+    "features": [
+        "adapter"
+    ],
+    "adminFeatures": [
+        "tab",
+        "custom"
+    ],
+    "type": "utility",
+    "startMode": "daemon",
+    "connectionType": "cloud",
+    "dataSource": "poll",
+    "connectionIndicator": "no",
+    "language": "JavaScript",
+    "tools": [
+        "ESLint",
+        "type checking"
+    ],
+    "indentation": "Space (4)",
+    "quotes": "double",
+    "es6class": "no",
+    "authorName": "SirJojo69",
+    "authorGithub": "sirjojo69",
+    "authorEmail": "gtj.howe@gmx.de",
+    "gitRemoteProtocol": "HTTPS",
+    "gitCommit": "no",
+    "license": "MIT License",
+    "ci": "gh-actions",
+    "dependabot": "no",
+    "creatorVersion": "1.29.1"
+}
