@@ -5,41 +5,17 @@
         "news": {
             "0.0.1": {
                 "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
+                "de": "Erstveröffentlichung"
             }
         },
         "title": "aWATTar",
         "titleLang": {
             "en": "aWATTar",
-            "de": "aWATTar",
-            "ru": "Аваттар",
-            "pt": "aWATTar",
-            "nl": "aWATTar",
-            "fr": "aWATTar",
-            "it": "aWATTar",
-            "es": "aWATTar",
-            "pl": "Awattar",
-            "zh-cn": "阿瓦塔"
+            "de": "aWATTar"
         },
         "desc": {
             "en": "reads out hourly prices from aWATTar",
-            "de": "liest Stundenpreise von der aWATTar Website",
-            "ru": "считывает почасовые цены из aWATTar",
-            "pt": "lê os preços por hora de aWATTar",
-            "nl": "leest uurtarieven van aWATTar voor",
-            "fr": "lit les prix horaires d'aWATTar",
-            "it": "legge i prezzi orari da aWATTar",
-            "es": "lee los precios por hora de aWATTar",
-            "pl": "odczytuje ceny godzinowe z aWATTar",
-            "zh-cn": "从aWATTar读出每小时价格"
+            "de": "liest Stundenpreise von der aWATTar Website"
         },
         "authors": [
             "SirJojo69 <gtj.howe@gmx.de>"
@@ -67,15 +43,7 @@
             "singleton": true,
             "name": {
                 "en": "aWATTar",
-                "de": "aWATTar",
-                "ru": "Аваттар",
-                "pt": "aWATTar",
-                "nl": "aWATTar",
-                "fr": "aWATTar",
-                "it": "aWATTar",
-                "es": "aWATTar",
-                "pl": "aWATTar",
-                "zh-cn": "阿瓦塔"
+                "de": "aWATTar"
             },
             "link": "",
             "fa-icon": "info"
