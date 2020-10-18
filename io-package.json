@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
             "0.0.1": {
                 "en": "initial release",
@@ -32,7 +32,8 @@
         "extIcon": "https://raw.githubusercontent.com/sirjojo69/ioBroker.awattar/master/admin/awattar.png",
         "readme": "https://github.com/sirjojo69/ioBroker.awattar/blob/master/README.md",
         "loglevel": "info",
-        "mode": "daemon",
+        "mode": "schedule",
+        "schedule": "0 15 * * *",
         "type": "utility",
         "compact": true,
         "connectionType": "cloud",
