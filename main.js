@@ -1,5 +1,7 @@
+// @ts-nocheck
 "use strict";
 
+const { Adapter } = require("@iobroker/adapter-core");
 /*
  * Created with @iobroker/create-adapter v1.29.1
  */
@@ -7,9 +9,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
-
-// Load your modules here, e.g.:
-// const fs = require("fs");
+const request = require("request");
 
 /**
  * The adapter instance
@@ -87,60 +87,248 @@ function startAdapter(options) {
     }));
 }
 
+function compareValues(key, order = 'asc') {
+    return function innerSort(a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
+  
+      const varA = (typeof a[key] === 'string')
+        ? a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string')
+        ? b[key].toUpperCase() : b[key];
+  
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order === 'desc') ? (comparison * -1) : comparison
+      );
+    };
+  }
+
 async function main() {
 
     // The adapters config (in the instance object everything under the attribute "native") is accessible via
     // adapter.config:
-    adapter.log.info("config option1: " + adapter.config.option1);
-    adapter.log.info("config option2: " + adapter.config.option2);
-    adapter.log.info("Was gehtn hier ab....");
+    // adapter.log.info("aWATTar API URL: " + adapter.config.aWATTarApiUrl);
+    // adapter.log.info("Loading Threshold Start: " + adapter.config.LoadingThresholdStart);
+    // adapter.log.info("Loading Threshold End: " + adapter.config.LoadingThresholdEnd);
 
-    /*
-        For every state in the system there has to be also an object of type state
-        Here a simple template for a boolean variable named "testVariable"
-        Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-    */
-    await adapter.setObjectNotExistsAsync("testVariable", {
-        type: "state",
-        common: {
-            name: "testVariable",
-            type: "boolean",
-            role: "indicator",
-            read: true,
-            write: true,
-        },
-        native: {},
+    const url = adapter.config.aWATTarApiUrl;
+    const loadingThresholdStart = adapter.config.LoadingThresholdStart;
+    if (isNaN(parseInt(loadingThresholdStart))) {return adapter.log.error("loadingThresholdStart NaN")}
+    const loadingThresholdEnd = adapter.config.LoadingThresholdEnd;
+    if (isNaN(parseInt(loadingThresholdStart))) {return adapter.log.error("loadingThresholdEnd NaN")}
+
+    const heute = new Date();
+    const loadingThresholdStartDateTime = new Date(heute.getFullYear(),heute.getMonth(),heute.getDate(),parseInt(loadingThresholdStart),0,0)
+    const loadingThresholdEndDateTime = new Date(heute.getFullYear(),heute.getMonth(),heute.getDate() + 1,parseInt(loadingThresholdEnd),0,0)
+
+    const options = {
+        url: url,
+        method: 'GET'
+    };
+
+    request(options, (error, response, body) => {
+        // adapter.log.info("request done");
+        if(error) return adapter.log.error(error);
+
+        if(response.statusCode == 200) {
+
+            adapter.setObjectNotExists("prices.Rawdata", {
+                    type: "state",
+                    common: {
+                        name: "Rawdata",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+            adapter.setState("prices.Rawdata", body);
+			
+            let array = JSON.parse(body).data;
+
+            for(let i = 0; i < array.length; i++) {
+                let stateBaseName = "prices." + i + ".";
+                adapter.setObjectNotExists(stateBaseName + "start", {
+                    type: "state",
+                    common: {
+                        name: "Gultigkeitsbeginn (Uhrzeit)",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+
+                adapter.setObjectNotExists(stateBaseName + "startDate", {
+                    type: "state",
+                    common: {
+                        name: "Gultigkeitsbeginn (Datum)",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+
+                adapter.setObjectNotExists(stateBaseName + "end", {
+                    type: "state",
+                    common: {
+                        name: "Gultigkeitsende (Uhrzeit)",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+
+                adapter.setObjectNotExists(stateBaseName + "endDate", {
+                    type: "state",
+                    common: {
+                        name: "Gultigkeitsende (Datum)",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+
+                adapter.setObjectNotExists(stateBaseName + "priceMwh", {
+                    type: "state",
+                    common: {
+                        name: "Preis pro Mwh",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+
+                adapter.setObjectNotExists(stateBaseName + "priceKwh", {
+                    type: "state",
+                    common: {
+                        name: "RawdPreis pro Kwhata",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+
+                adapter.setObjectNotExists(stateBaseName + "unit", {
+                    type: "state",
+                    common: {
+                        name: "Einheit",
+                        type: "string",
+                        role: "value"
+                    },
+                    native: {}
+                });
+
+                let start = new Date(array[i].start_timestamp);
+                let startTime = start.toLocaleTimeString('de-DE');
+                let startDate = start.toLocaleDateString('de-DE');
+                let end = new Date(array[i].end_timestamp);
+                let endTime = end.toLocaleTimeString('de-DE');
+                let endDate = end.toLocaleDateString('de-DE');
+                let priceMwh = array[i].marketprice;
+                let priceKwh = array[i].marketprice / 1000;
+                let unit = array[i].unit;
+
+                adapter.setState(stateBaseName + "start", startTime);
+                adapter.setState(stateBaseName + "startDate", startDate);
+                adapter.setState(stateBaseName + "end", endTime);
+                adapter.setState(stateBaseName + "endDate", endDate);
+                adapter.setState(stateBaseName + "priceMwh", priceMwh);
+                adapter.setState(stateBaseName + "priceKwh", priceKwh);
+                adapter.setState(stateBaseName + "unit", unit);
+            }
+
+            let sortedArray = array.sort(compareValues("marketprice", "asc"));
+            let j= 0;
+
+            for(let k = 0; k < sortedArray.length; k++) {
+                let start = new Date(array[k].start_timestamp);
+                let end = new Date(array[k].end_timestamp);
+
+                if (start >= loadingThresholdStartDateTime && end < loadingThresholdEndDateTime) {
+                    let stateBaseName = "pricesOrdered." + j + ".";
+
+                    adapter.setObjectNotExists(stateBaseName + "start", {
+                        type: "state",
+                        common: {
+                            name: "Gultigkeitsbeginn (Uhrzeit)",
+                            type: "string",
+                            role: "value"
+                        },
+                        native: {}
+                    });
+    
+                    adapter.setObjectNotExists(stateBaseName + "startDate", {
+                        type: "state",
+                        common: {
+                            name: "Gultigkeitsbeginn (Datum)",
+                            type: "string",
+                            role: "value"
+                        },
+                        native: {}
+                    });
+    
+                    adapter.setObjectNotExists(stateBaseName + "end", {
+                        type: "state",
+                        common: {
+                            name: "Gultigkeitsende (Uhrzeit)",
+                            type: "string",
+                            role: "value"
+                        },
+                        native: {}
+                    });
+    
+                    adapter.setObjectNotExists(stateBaseName + "endDate", {
+                        type: "state",
+                        common: {
+                            name: "Gultigkeitsende (Datum)",
+                            type: "string",
+                            role: "value"
+                        },
+                        native: {}
+                    });
+    
+                    adapter.setObjectNotExists(stateBaseName + "priceKwh", {
+                        type: "state",
+                        common: {
+                            name: "RawdPreis pro Kwhata",
+                            type: "string",
+                            role: "value"
+                        },
+                        native: {}
+                    });
+    
+                    let startTime = start.toLocaleTimeString('de-DE');
+                    let startDate = start.toLocaleDateString('de-DE');
+                    let endTime = end.toLocaleTimeString('de-DE');
+                    let endDate = end.toLocaleDateString('de-DE');
+                    let priceKwh = array[k].marketprice / 1000;
+
+                    adapter.setState(stateBaseName + "start", startTime);
+                    adapter.setState(stateBaseName + "startDate", startDate);
+                    adapter.setState(stateBaseName + "end", endTime);
+                    adapter.setState(stateBaseName + "endDate", endDate);
+                    adapter.setState(stateBaseName + "priceKwh", priceKwh);
+
+                    j++;
+                }
+
+            }
+
+        }
     });
 
-    // In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-    adapter.subscribeStates("testVariable");
-    // You can also add a subscription for multiple states. The following line watches all states starting with "lights."
-    // adapter.subscribeStates("lights.*");
-    // Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
-    // adapter.subscribeStates("*");
-
-    /*
-        setState examples
-        you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-    */
-    // the variable testVariable is set to true as command (ack=false)
-    await adapter.setStateAsync("testVariable", true);
-
-    // same thing, but the value is flagged "ack"
-    // ack should be always set to true if the value is received from or acknowledged from the target system
-    await adapter.setStateAsync("testVariable", { val: true, ack: true });
-
-    // same thing, but the state is deleted after 30s (getState will return null afterwards)
-    await adapter.setStateAsync("testVariable", { val: true, ack: true, expire: 30 });
-
-    // examples for the checkPassword/checkGroup functions
-    adapter.checkPassword("admin", "iobroker", (res) => {
-        adapter.log.info("check user admin pw iobroker: " + res);
-    });
-
-    adapter.checkGroup("admin", "admin", (res) => {
-        adapter.log.info("check group user admin group admin: " + res);
-    });
+    setTimeout(function() {
+        // @ts-ignore
+        adapter.stop();
+    }, 10000)
+    
 }
 
 // @ts-ignore parent is a valid property on module

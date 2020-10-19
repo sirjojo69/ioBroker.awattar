@@ -1,6 +1,6 @@
 {
   "name": "iobroker.awattar",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "reads out hourly prices from aWATTar Website",
   "author": {
     "name": "SirJojo69",
@@ -17,7 +17,8 @@
     "url": "https://github.com/sirjojo69/ioBroker.awattar"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.4.0"
+    "@iobroker/adapter-core": "^2.4.0",
+    "request": "2.88.2"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.3.0",

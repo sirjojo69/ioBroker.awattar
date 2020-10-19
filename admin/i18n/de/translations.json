@@ -1,5 +1,5 @@
 {
-    "awattar adapter settings": "Adaptereinstellungen für awattar",
-    "option1": "Option 1",
-    "option2": "Option 2"
+    "aWATTarApiUrl": "URL für aWATTar API",
+    "LoadingThresholdStart": "Start Zeitraum nach Preis sortiert",
+    "LoadingThresholdEnd": "End Zeitraum nach Preis sortiert"
 }

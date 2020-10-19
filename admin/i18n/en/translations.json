@@ -1,5 +1,5 @@
 {
-    "awattar adapter settings": "Adapter settings for awattar",
-    "option1": "option1",
-    "option2": "option2"
+    "aWATTarApiUrl": "URL for aWATTar API",
+    "LoadingThresholdStart": "Start Threshold Loading (e.g. for EV)",
+    "LoadingThresholdEnd": "End Threshold Loading"
 }

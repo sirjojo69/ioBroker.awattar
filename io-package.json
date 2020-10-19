@@ -33,7 +33,7 @@
         "readme": "https://github.com/sirjojo69/ioBroker.awattar/blob/master/README.md",
         "loglevel": "info",
         "mode": "schedule",
-        "schedule": "0 15 * * *",
+        "schedule": "* * * * *",
         "type": "utility",
         "compact": true,
         "connectionType": "cloud",
@@ -57,7 +57,9 @@
         ]
     },
     "native": {
-        "Marketdata URL": "https://api.awattar.de/v1/marketdata"
+        "aWATTarApiUrl": "https://api.awattar.de/v1/marketdata",
+        "LoadingThresholdStart": "23:00",
+        "LoadingThresholdEnd": "06:00"
     },
     "objects": [],
     "instanceObjects": []
