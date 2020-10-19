@@ -13,14 +13,14 @@
 **Tests:** ![Test and Release](https://github.com/sirjojo69/ioBroker.awattar/workflows/Test%20and%20Release/badge.svg)
 
 <p>
-An image as a link: <a href="https://www.awattar.de/">
-<img border="0" alt="aWATTar" src="awattarBig.png">
+<a href="https://www.awattar.de/" target="_blank">
+<img border="0" alt="aWATTar" src="admin/awattarBig.png">
 </a>
 </p>
 
 
 ## aWATTar adapter for ioBroker
-Dieser Adapter liest die Stunden Preise für den kommenden Tag des Stromanbieters <a href="https://www.awattar.de/">aWATTar</a>
+Dieser Adapter liest die Stunden Preise für den kommenden Tag des Stromanbieters <a href="https://www.awattar.de/" target="_blank">aWATTar</a>
 für die Tarife hourly und hourly CAP.
 Mit dieser Information kann man dann steuern wann z.b. das Elektroauto oder der Hausspeicher geladen werden soll (nämlich zur billigsten Zeit).
 
@@ -36,7 +36,7 @@ Der Folder "prices_ordered" enthält -sortiert nach dem Stundenpreis- einen Eint
 
 Im Ausgangszustand ist der Adapter so eingestellt dass er um 15.00 Uhr die Werte für die 24h des nächsten Tages holt.
 Dieser Schedule kann natürlich angepasst werden.
-Laut aWATTar api Doku stehen diese Werte jeden Tag um 14.00 Uhr bereit.
+Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api Doku</a> stehen diese Werte jeden Tag um 14.00 Uhr bereit.
 
 
 ## Changelog
