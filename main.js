@@ -45,18 +45,6 @@ function startAdapter(options) {
             }
         },
 
-        // If you need to react to object changes, uncomment the following method.
-        // You also need to subscribe to the objects with `adapter.subscribeObjects`, similar to `adapter.subscribeStates`.
-        // objectChange: (id, obj) => {
-        //     if (obj) {
-        //         // The object was changed
-        //         adapter.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-        //     } else {
-        //         // The object was deleted
-        //         adapter.log.info(`object ${id} deleted`);
-        //     }
-        // },
-
         // is called if a subscribed state changes
         stateChange: (id, state) => {
             if (state) {
@@ -67,23 +55,6 @@ function startAdapter(options) {
                 adapter.log.info(`state ${id} deleted`);
             }
         },
-
-        // If you need to accept messages in your adapter, uncomment the following block.
-        // /**
-        //  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-        //  * Using this method requires "common.message" property to be set to true in io-package.json
-        //  */
-        // message: (obj) => {
-        //     if (typeof obj === "object" && obj.message) {
-        //         if (obj.command === "send") {
-        //             // e.g. send email or pushover or whatever
-        //             adapter.log.info("send command");
-
-        //             // Send response in callback if required
-        //             if (obj.callback) adapter.sendTo(obj.from, obj.command, "Message received", obj.callback);
-        //         }
-        //     }
-        // },
     }));
 }
 
@@ -113,8 +84,6 @@ function compareValues(key, order = 'asc') {
 
 async function main() {
 
-    // The adapters config (in the instance object everything under the attribute "native") is accessible via
-    // adapter.config:
     // adapter.log.info("aWATTar API URL: " + adapter.config.aWATTarApiUrl);
     // adapter.log.info("Loading Threshold Start: " + adapter.config.LoadingThresholdStart);
     // adapter.log.info("Loading Threshold End: " + adapter.config.LoadingThresholdEnd);
@@ -140,7 +109,7 @@ async function main() {
 
         if(response.statusCode == 200) {
 
-            adapter.setObjectNotExists("prices.Rawdata", {
+            adapter.setObjectNotExists("Rawdata", {
                     type: "state",
                     common: {
                         name: "Rawdata",
@@ -149,7 +118,7 @@ async function main() {
                     },
                     native: {}
                 });
-            adapter.setState("prices.Rawdata", body);
+            adapter.setState("Rawdata", body);
 			
             let array = JSON.parse(body).data;
 
@@ -208,7 +177,7 @@ async function main() {
                 adapter.setObjectNotExists(stateBaseName + "priceKwh", {
                     type: "state",
                     common: {
-                        name: "RawdPreis pro Kwhata",
+                        name: "Preis pro Kwh",
                         type: "string",
                         role: "value"
                     },
@@ -297,7 +266,7 @@ async function main() {
                     adapter.setObjectNotExists(stateBaseName + "priceKwh", {
                         type: "state",
                         common: {
-                            name: "RawdPreis pro Kwhata",
+                            name: "Preis pro Kwh",
                             type: "string",
                             role: "value"
                         },
@@ -308,7 +277,7 @@ async function main() {
                     let startDate = start.toLocaleDateString('de-DE');
                     let endTime = end.toLocaleTimeString('de-DE');
                     let endDate = end.toLocaleDateString('de-DE');
-                    let priceKwh = array[k].marketprice / 1000;
+                    let priceKwh = array[k].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
 
                     adapter.setState(stateBaseName + "start", startTime);
                     adapter.setState(stateBaseName + "startDate", startDate);
@@ -325,7 +294,6 @@ async function main() {
     });
 
     setTimeout(function() {
-        // @ts-ignore
         adapter.stop();
     }, 10000)
     

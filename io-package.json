@@ -33,7 +33,7 @@
         "readme": "https://github.com/sirjojo69/ioBroker.awattar/blob/master/README.md",
         "loglevel": "info",
         "mode": "schedule",
-        "schedule": "* * * * *",
+        "schedule": "0 15 * * *",
         "type": "utility",
         "compact": true,
         "connectionType": "cloud",
