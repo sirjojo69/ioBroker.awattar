@@ -44,8 +44,11 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 ### 0.0.1
 * (SirJojo69) initial release
 
-### 0.0.1
+### 1.0.0
 * (SirJojo69) first stable release
+
+### 1.0.1
+* (SirJojo69) deleted admin tab
 
 
 ## License
