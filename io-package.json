@@ -2,6 +2,29 @@
     "common": {
         "name": "awattar",
         "version": "1.0.1",
+        "title": "aWATTar",
+        "desc": {
+            "en": "reads out hourly prices from aWATTar",
+            "de": "liest Stundenpreise von der aWATTar Website"
+        },
+        "authors": [
+            "SirJojo69 <gtj.howe@gmx.de>"
+        ],
+        "platform": "Javascript/Node.js",
+        "mode": "schedule",
+        "schedule": "0 15 * * *",
+        "enabled": true,
+        "license": "MIT",
+        "loglevel": "info",
+        "readme": "https://github.com/sirjojo69/ioBroker.awattar/blob/master/README.md",
+        "icon": "awattar.png",
+        "extIcon": "https://raw.githubusercontent.com/sirjojo69/ioBroker.awattar/master/admin/awattar.png",
+        "keywords": [
+            "PV",
+            "aWATTAR",
+            "ioBroker"
+        ],
+        "type": "utility",
         "news": {
             "1.0.0": {
                 "en": "initial release",
@@ -12,38 +35,15 @@
                 "de": "admin tab rausgenommen"
             }
         },
-        "title": "aWATTar",
         "titleLang": {
             "en": "aWATTar",
             "de": "aWATTar"
         },
-        "desc": {
-            "en": "reads out hourly prices from aWATTar",
-            "de": "liest Stundenpreise von der aWATTar Website"
-        },
-        "authors": [
-            "SirJojo69 <gtj.howe@gmx.de>"
-        ],
-        "keywords": [
-            "PV",
-            "aWATTAR"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
         "main": "main.js",
-        "icon": "awattar.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/sirjojo69/ioBroker.awattar/master/admin/awattar.png",
-        "readme": "https://github.com/sirjojo69/ioBroker.awattar/blob/master/README.md",
-        "loglevel": "info",
-        "mode": "schedule",
-        "schedule": "0 15 * * *",
-        "type": "utility",
         "compact": true,
         "connectionType": "cloud",
         "dataSource": "poll",
         "materialize": true,
-        "materializeTab": true,
         "supportCustoms": true,
         "dependencies": [
             {
