@@ -1,6 +1,6 @@
 {
   "name": "iobroker.awattar",
-  "version": "0.0.2",
+  "version": "1.0.1",
   "description": "reads out hourly prices from aWATTar Website",
   "author": {
     "name": "SirJojo69",
@@ -10,7 +10,8 @@
   "license": "MIT",
   "keywords": [
     "PV",
-    "aWATTAR"
+    "aWATTAR",
+    "ioBroker"
   ],
   "repository": {
     "type": "git",

@@ -1,11 +1,15 @@
 {
     "common": {
         "name": "awattar",
-        "version": "0.0.2",
+        "version": "1.0.1",
         "news": {
-            "0.0.1": {
+            "1.0.0": {
                 "en": "initial release",
                 "de": "Erstveröffentlichung"
+            },
+            "1.0.1": {
+                "en": "deleted admin tab",
+                "de": "admin tab rausgenommen"
             }
         },
         "title": "aWATTar",
@@ -40,15 +44,6 @@
         "dataSource": "poll",
         "materialize": true,
         "materializeTab": true,
-        "adminTab": {
-            "singleton": true,
-            "name": {
-                "en": "aWATTar",
-                "de": "aWATTar"
-            },
-            "link": "",
-            "fa-icon": "info"
-        },
         "supportCustoms": true,
         "dependencies": [
             {
