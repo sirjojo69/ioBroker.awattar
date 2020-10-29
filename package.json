@@ -1,6 +1,6 @@
 {
   "name": "iobroker.awattar",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "reads out hourly prices from aWATTar Website",
   "author": {
     "name": "SirJojo69",

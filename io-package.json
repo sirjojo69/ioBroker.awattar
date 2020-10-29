@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.0.1",
+        "version": "1.0.3",
         "title": "aWATTar",
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -30,9 +30,13 @@
                 "en": "initial release",
                 "de": "Erstveröffentlichung"
             },
-            "1.0.1": {
+            "1.0.2": {
                 "en": "deleted admin tab",
                 "de": "admin tab rausgenommen"
+            },
+            "1.0.3": {
+                "en": "customized some settings",
+                "de": "einige Einstellungen verändert"
             }
         },
         "titleLang": {

@@ -114,7 +114,10 @@ async function main() {
                     common: {
                         name: "Rawdata",
                         type: "string",
-                        role: "value"
+                        role: "value",
+                        desc: "Beinhaltet die Rohdaten des Abfrageergebnisses als JSON",
+                        read: true,
+                        write: false
                     },
                     native: {}
                 });
@@ -129,7 +132,10 @@ async function main() {
                     common: {
                         name: "Gultigkeitsbeginn (Uhrzeit)",
                         type: "string",
-                        role: "value"
+                        role: "value",
+                        desc: "Uhrzeit des Beginns der Gültigkeit des Preises",
+                        read: true,
+                        write: false
                     },
                     native: {}
                 });
@@ -139,7 +145,10 @@ async function main() {
                     common: {
                         name: "Gultigkeitsbeginn (Datum)",
                         type: "string",
-                        role: "value"
+                        role: "value",
+                        desc: "Datum des Beginns der Gültigkeit des Preises",
+                        read: true,
+                        write: false
                     },
                     native: {}
                 });
@@ -149,7 +158,9 @@ async function main() {
                     common: {
                         name: "Gultigkeitsende (Uhrzeit)",
                         type: "string",
-                        role: "value"
+                        role: "value",
+                        read: true,
+                        write: false
                     },
                     native: {}
                 });
@@ -159,7 +170,9 @@ async function main() {
                     common: {
                         name: "Gultigkeitsende (Datum)",
                         type: "string",
-                        role: "value"
+                        role: "value",
+                        read: true,
+                        write: false
                     },
                     native: {}
                 });
@@ -167,9 +180,12 @@ async function main() {
                 adapter.setObjectNotExists(stateBaseName + "priceMwh", {
                     type: "state",
                     common: {
-                        name: "Preis pro Mwh",
-                        type: "string",
-                        role: "value"
+                        name: "Preis pro MWh",
+                        type: "number",
+                        role: "value",
+                        unit: "Euro / MWh",
+                        read: true,
+                        write: false
                     },
                     native: {}
                 });
@@ -177,19 +193,12 @@ async function main() {
                 adapter.setObjectNotExists(stateBaseName + "priceKwh", {
                     type: "state",
                     common: {
-                        name: "Preis pro Kwh",
-                        type: "string",
-                        role: "value"
-                    },
-                    native: {}
-                });
-
-                adapter.setObjectNotExists(stateBaseName + "unit", {
-                    type: "state",
-                    common: {
-                        name: "Einheit",
-                        type: "string",
-                        role: "value"
+                        name: "Preis pro KWh",
+                        type: "number",
+                        role: "value",
+                        unit: "Cent / KWh",
+                        read: true,
+                        write: false
                     },
                     native: {}
                 });
@@ -201,8 +210,7 @@ async function main() {
                 let endTime = end.toLocaleTimeString('de-DE');
                 let endDate = end.toLocaleDateString('de-DE');
                 let priceMwh = array[i].marketprice;
-                let priceKwh = array[i].marketprice / 1000;
-                let unit = array[i].unit;
+                let priceKwh = priceMwh / 10;
 
                 adapter.setState(stateBaseName + "start", startTime);
                 adapter.setState(stateBaseName + "startDate", startDate);
@@ -210,7 +218,6 @@ async function main() {
                 adapter.setState(stateBaseName + "endDate", endDate);
                 adapter.setState(stateBaseName + "priceMwh", priceMwh);
                 adapter.setState(stateBaseName + "priceKwh", priceKwh);
-                adapter.setState(stateBaseName + "unit", unit);
             }
 
             let sortedArray = array.sort(compareValues("marketprice", "asc"));
@@ -228,7 +235,10 @@ async function main() {
                         common: {
                             name: "Gultigkeitsbeginn (Uhrzeit)",
                             type: "string",
-                            role: "value"
+                            role: "value",
+                            desc: "Uhrzeit des Beginns der Gültigkeit des Preises",
+                            read: true,
+                            write: false
                         },
                         native: {}
                     });
@@ -238,7 +248,10 @@ async function main() {
                         common: {
                             name: "Gultigkeitsbeginn (Datum)",
                             type: "string",
-                            role: "value"
+                            role: "value",
+                            desc: "Datum des Beginns der Gültigkeit des Preises",
+                            read: true,
+                            write: false
                         },
                         native: {}
                     });
@@ -248,7 +261,9 @@ async function main() {
                         common: {
                             name: "Gultigkeitsende (Uhrzeit)",
                             type: "string",
-                            role: "value"
+                            role: "value",
+                            read: true,
+                            write: false
                         },
                         native: {}
                     });
@@ -258,7 +273,9 @@ async function main() {
                         common: {
                             name: "Gultigkeitsende (Datum)",
                             type: "string",
-                            role: "value"
+                            role: "value",
+                            read: true,
+                            write: false
                         },
                         native: {}
                     });
@@ -266,9 +283,12 @@ async function main() {
                     adapter.setObjectNotExists(stateBaseName + "priceKwh", {
                         type: "state",
                         common: {
-                            name: "Preis pro Kwh",
+                            name: "Preis pro KWh",
                             type: "string",
-                            role: "value"
+                            role: "value",
+                            unit: "Cent / KWh",
+                            read: true,
+                            write: false
                         },
                         native: {}
                     });
