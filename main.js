@@ -89,6 +89,8 @@ async function main() {
     // adapter.log.info("Loading Threshold End: " + adapter.config.LoadingThresholdEnd);
 
     const url = adapter.config.aWATTarApiUrl;
+    const mwst = parseInt(adapter.config.MWstRate);
+    const workRate = parseFloat(adapter.config.WorkRate);
     const loadingThresholdStart = adapter.config.LoadingThresholdStart;
     if (isNaN(parseInt(loadingThresholdStart))) {return adapter.log.error("loadingThresholdStart NaN")}
     const loadingThresholdEnd = adapter.config.LoadingThresholdEnd;
@@ -98,13 +100,19 @@ async function main() {
     const loadingThresholdStartDateTime = new Date(heute.getFullYear(),heute.getMonth(),heute.getDate(),parseInt(loadingThresholdStart),0,0)
     const loadingThresholdEndDateTime = new Date(heute.getFullYear(),heute.getMonth(),heute.getDate() + 1,parseInt(loadingThresholdEnd),0,0)
 
+    let epochToday = new Date(heute.getFullYear(),heute.getMonth(),heute.getDate()).getTime();
+    let epochTomorrow = new Date(heute.getFullYear(),heute.getMonth(),heute.getDate()+2).getTime() - 1;
+    let urlEpoch = url.concat("?start=", epochToday.toString(), "&end=", epochTomorrow.toString());
+
     const options = {
-        url: url,
+        url: urlEpoch,
         method: 'GET'
     };
 
     request(options, (error, response, body) => {
         // adapter.log.info("request done");
+        var mwstRate = (mwst + 100) / 100;
+
         if(error) return adapter.log.error(error);
 
         if(response.statusCode == 200) {
@@ -177,23 +185,36 @@ async function main() {
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "priceMwh", {
+                adapter.setObjectNotExists(stateBaseName + "nettoPriceKwh", {
                     type: "state",
                     common: {
-                        name: "Preis pro MWh",
+                        name: "Preis pro KWh (excl. MwSt.)",
                         type: "number",
                         role: "value",
-                        unit: "Euro / MWh",
+                        unit: "Cent / KWh",
                         read: true,
                         write: false
                     },
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "priceKwh", {
+                adapter.setObjectNotExists(stateBaseName + "bruttoPriceKwh", {
                     type: "state",
                     common: {
-                        name: "Preis pro KWh",
+                        name: "Preis pro KWh (incl. MwSt.)",
+                        type: "number",
+                        role: "value",
+                        unit: "Cent / KWh",
+                        read: true,
+                        write: false
+                    },
+                    native: {}
+                });
+
+                adapter.setObjectNotExists(stateBaseName + "totalPriceKwh", {
+                    type: "state",
+                    common: {
+                        name: "Gesamtpreis pro KWh (incl. MwSt.)",
                         type: "number",
                         role: "value",
                         unit: "Cent / KWh",
@@ -209,15 +230,17 @@ async function main() {
                 let end = new Date(array[i].end_timestamp);
                 let endTime = end.toLocaleTimeString('de-DE');
                 let endDate = end.toLocaleDateString('de-DE');
-                let priceMwh = array[i].marketprice;
-                let priceKwh = priceMwh / 10;
+                let nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
+                let bruttoPriceKwh = nettoPriceKwh * mwstRate; 
+                let toalPriceKwh = bruttoPriceKwh + workRate ; 
 
                 adapter.setState(stateBaseName + "start", startTime);
                 adapter.setState(stateBaseName + "startDate", startDate);
                 adapter.setState(stateBaseName + "end", endTime);
                 adapter.setState(stateBaseName + "endDate", endDate);
-                adapter.setState(stateBaseName + "priceMwh", priceMwh);
-                adapter.setState(stateBaseName + "priceKwh", priceKwh);
+                adapter.setState(stateBaseName + "nettoPriceKwh", nettoPriceKwh);
+                adapter.setState(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh);
+                adapter.setState(stateBaseName + "totalPriceKwh", toalPriceKwh);
             }
 
             let sortedArray = array.sort(compareValues("marketprice", "asc"));
@@ -280,19 +303,19 @@ async function main() {
                         native: {}
                     });
     
-                    adapter.setObjectNotExists(stateBaseName + "priceKwh", {
-                        type: "state",
-                        common: {
-                            name: "Preis pro KWh",
-                            type: "string",
-                            role: "value",
-                            unit: "Cent / KWh",
-                            read: true,
-                            write: false
-                        },
-                        native: {}
-                    });
-    
+                adapter.setObjectNotExists(stateBaseName + "priceKwh", {
+                    type: "state",
+                    common: {
+                        name: "Preis pro KWh (excl. MwSt.)",
+                        type: "number",
+                        role: "value",
+                        unit: "Cent / KWh",
+                        read: true,
+                        write: false
+                    },
+                    native: {}
+                });
+
                     let startTime = start.toLocaleTimeString('de-DE');
                     let startDate = start.toLocaleDateString('de-DE');
                     let endTime = end.toLocaleTimeString('de-DE');

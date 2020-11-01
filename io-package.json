@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.0.3",
+        "version": "1.0.4",
         "title": "aWATTar",
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -37,6 +37,10 @@
             "1.0.3": {
                 "en": "customized some settings",
                 "de": "einige Einstellungen verändert"
+            },
+            "1.0.4": {
+                "en": "added total price and price incl. vat, API call incl. Parameter srta and end",
+                "de": "Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende"
             }
         },
         "titleLang": {
@@ -58,7 +62,9 @@
     "native": {
         "aWATTarApiUrl": "https://api.awattar.de/v1/marketdata",
         "LoadingThresholdStart": "23:00",
-        "LoadingThresholdEnd": "06:00"
+        "LoadingThresholdEnd": "06:00",
+        "MWstRate" : "16",
+        "WorkRate" : "20,08"
     },
     "objects": [],
     "instanceObjects": []

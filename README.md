@@ -24,15 +24,16 @@ Dieser Adapter liest die Stunden Preise für den kommenden Tag des Stromanbieter
 für die Tarife hourly und hourly CAP.
 Mit dieser Information kann man dann steuern wann z.b. das Elektroauto oder der Hausspeicher geladen werden soll (nämlich zur billigsten Zeit).
 
-In den Einstellungen des Adapters findest du 3 Felder (die jeweils mit Standardwerten belegt sind):
+In den Einstellungen des Adapters findest du 5 Felder (die jeweils mit Standardwerten belegt sind):
 <li>In der "URL for aWATTar API " steht die URL für den API Preis Datenfeed von aWATTar.</li>
 <li>In der "Start Threshold Loading (e.g. for EV)" steht eine Uhrzeit die den Beginn eines Zeitraumes darstellt, für den man die billigsten Stunden in geordneter Reihenfolge bekommen möchte</li>
 <li>In der "End Threshold Loading" steht eine Uhrzeit die das Ende eines Zeitraumes darstellt, für den man die billigsten Stunden in geordneter Reihenfolge bekommen möchte</li>
+<li>In der "actual VAT rate (percent)" muss die aktuell gültige Mwst. angegeben werden. Die Daten die über die Schnittstelle kommen sind ohne Mwst.</li>
+<li>In "Arbeitspreis ( "Netznutzung" + "Umlagen, Abgaben, Steuern" + "Kosten für Ökostromzertifikate, Abrechnung und Vertrieb", incl. MWSt.)" wird dein persönlicher Arbeitspreis eingetragen (abhängig von der PLZ)</li>
 
 Die Ergebnisse stehen dann im Object Baum des Adapters. (awattar.0)
 Der Folder "prices" enthält für jede Stunde des Tages einen Eintrag mit dem Strompreis für diese Stunde
 Der Folder "prices_ordered" enthält -sortiert nach dem Stundenpreis- einen Eintrag für jede Stunde des in den Settings eingestellten Zeitraumes mit dem Strompreis für diese Stunde .
-
 
 Im Ausgangszustand ist der Adapter so eingestellt dass er um 15.00 Uhr die Werte für die 24h des nächsten Tages holt.
 Dieser Schedule kann natürlich angepasst werden.
@@ -42,13 +43,20 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 ## Changelog
 
 ### 0.0.1
-* (SirJojo69) initial release
+* (SirJojo69) initial release.
 
 ### 1.0.0
-* (SirJojo69) first stable release
+* (SirJojo69) first stable release.
 
 ### 1.0.1
-* (SirJojo69) deleted admin tab
+* (SirJojo69) deleted admin tab.
+
+### 1.0.3
+* (SirJojo69) einige Einstellungen verändert.
+
+### 1.0.4
+* (SirJojo69) Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende.
+
 
 
 ## License
