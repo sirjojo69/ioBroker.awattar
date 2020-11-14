@@ -26,11 +26,13 @@ Mit dieser Information kann man dann steuern wann z.b. das Elektroauto oder der 
 
 In den Einstellungen des Adapters findest du 5 Felder (die jeweils mit Standardwerten belegt sind):
 <li>In der "URL for aWATTar API " steht die URL für den API Preis Datenfeed von aWATTar.</li>
-<li>In der "Start Threshold Loading (e.g. for EV)" steht eine Uhrzeit die den Beginn eines Zeitraumes darstellt, für den man die billigsten Stunden in geordneter Reihenfolge bekommen möchte</li>
-<li>In der "End Threshold Loading" steht eine Uhrzeit die das Ende eines Zeitraumes darstellt, für den man die billigsten Stunden in geordneter Reihenfolge bekommen möchte</li>
-<li>In der "actual VAT rate (percent)" muss die aktuell gültige Mwst. angegeben werden. Die Daten die über die Schnittstelle kommen sind ohne Mwst.</li>
-<li>In "Arbeitspreis ( "Netznutzung" + "Umlagen, Abgaben, Steuern" + "Kosten für Ökostromzertifikate, Abrechnung und Vertrieb", incl. MWSt.)" wird dein persönlicher Arbeitspreis eingetragen (abhängig von der PLZ)</li>
-
+<li>Wer (z.B. für die Beladung seines Elektroautos) die billigsten Stunden in der Nacht wissen will, benutzt die beiden folgenden Parameter.
+<ul>In der "Start Threshold Loading (e.g. for EV)" steht eine Uhrzeit die den Beginn eines Zeitraumes darstellt, für den man die billigsten Stunden in geordneter Reihenfolge bekommen möchte </ul>
+<ul>In der "End Threshold Loading" steht eine Uhrzeit die das Ende eines Zeitraumes darstellt, für den man die billigsten Stunden in geordneter Reihenfolge bekommen möchte</ul>
+</li>
+<li>In der "actual VAT rate (percent)" muss die aktuell gültige Mwst. angegeben werden. Die Preise die über die Schnittstelle kommen sind ohne Mwst.</li>
+<li>In "Arbeitspreis ( "Netznutzung" + "Umlagen, Abgaben, Steuern" + "Kosten für Ökostromzertifikate, Abrechnung und Vertrieb", incl. MWSt.)" kannst du deinen persönlichen Arbeitspreis eintragen (abhängig von der PLZ)</li>
+<br>
 Die Ergebnisse stehen dann im Object Baum des Adapters. (awattar.0)
 Der Folder "prices" enthält für jede Stunde des Tages einen Eintrag mit dem Strompreis für diese Stunde
 Der Folder "prices_ordered" enthält -sortiert nach dem Stundenpreis- einen Eintrag für jede Stunde des in den Settings eingestellten Zeitraumes mit dem Strompreis für diese Stunde .
