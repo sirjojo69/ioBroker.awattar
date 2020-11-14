@@ -36,7 +36,7 @@ In den Einstellungen des Adapters findest du 5 Felder (die jeweils mit Standardw
 Die Ergebnisse stehen dann im Object Baum des Adapters. (awattar.0)
 Der Folder "prices" enthält für jede Stunde des Tages einen Eintrag mit dem Strompreis für diese Stunde
 Der Folder "prices_ordered" enthält -sortiert nach dem Stundenpreis- einen Eintrag für jede Stunde des in den Settings eingestellten Zeitraumes mit dem Strompreis für diese Stunde .
-<br>
+<br><br>
 Im Ausgangszustand ist der Adapter so eingestellt dass er um 15.00 Uhr die Werte für die 24h des nächsten Tages holt.
 Dieser Schedule kann natürlich angepasst werden.
 Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api Doku</a> stehen diese Werte jeden Tag um 14.00 Uhr bereit.
