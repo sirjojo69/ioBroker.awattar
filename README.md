@@ -56,8 +56,8 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 ### 1.0.3
 * (SirJojo69) einige Einstellungen verändert.
 
-### 1.0.4
-* (SirJojo69) Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende.
+### 1.0.5
+* (SirJojo69) Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende. some internal fixes.
 
 
 

@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.0.4",
+        "version": "1.0.5",
         "title": "aWATTar",
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -38,8 +38,8 @@
                 "en": "customized some settings",
                 "de": "einige Einstellungen verändert"
             },
-            "1.0.4": {
-                "en": "added total price and price incl. vat, API call incl. Parameter srta and end",
+            "1.0.5": {
+                "en": "added total price and price incl. vat, API call incl. Parameter start and end",
                 "de": "Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende"
             }
         },
