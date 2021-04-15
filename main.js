@@ -1,4 +1,4 @@
-// @ts-nocheck
+  // @ts-nocheck
 "use strict";
 
 const { Adapter } = require("@iobroker/adapter-core");
@@ -9,7 +9,7 @@ const { Adapter } = require("@iobroker/adapter-core");
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
-const request = require("request");
+const axios = require('axios');
 
 /**
  * The adapter instance
@@ -87,9 +87,10 @@ async function main() {
     // adapter.log.info("aWATTar API URL: " + adapter.config.aWATTarApiUrl);
     // adapter.log.info("Loading Threshold Start: " + adapter.config.LoadingThresholdStart);
     // adapter.log.info("Loading Threshold End: " + adapter.config.LoadingThresholdEnd);
-
+    
     const url = adapter.config.aWATTarApiUrl;
     const mwst = parseInt(adapter.config.MWstRate);
+    const mwstRate = (mwst + 100) / 100;
     const workRate = parseFloat(adapter.config.WorkRate);
     const loadingThresholdStart = adapter.config.LoadingThresholdStart;
     if (isNaN(parseInt(loadingThresholdStart))) {return adapter.log.error("loadingThresholdStart NaN")}
@@ -104,38 +105,42 @@ async function main() {
     let epochTomorrow = new Date(heute.getFullYear(),heute.getMonth(),heute.getDate()+2).getTime() - 1;
     let urlEpoch = url.concat("?start=", epochToday.toString(), "&end=", epochTomorrow.toString());
 
-    const options = {
-        url: urlEpoch,
-        method: 'GET'
-    };
+    adapter.log.debug('local request started');
 
-    request(options, (error, response, body) => {
-        // adapter.log.info("request done");
-        var mwstRate = (mwst + 100) / 100;
+    axios({
+        method: 'get',
+        baseURL: urlEpoch,
+        timeout: 10000,
+        responseType: 'json'
+    }).then(
+        async (response) => {
+            const content = response.data;
 
-        if(error) return adapter.log.error(error);
+            adapter.log.debug('local request done');
+            adapter.log.debug('received data (' + response.status + '): ' + JSON.stringify(content));
 
-        if(response.statusCode == 200) {
+            //write raw data to data point
+            await adapter.setObjectNotExistsAsync("Rawdata", {
+                type: "state",
+                common: {
+                    name: "Rawdata",
+                    type: "string",
+                    role: "value",
+                    desc: "Beinhaltet die Rohdaten des Abfrageergebnisses als JSON",
+                    read: true,
+                    write: false
+                },
+                native: {}
+            });
+            await adapter.setStateAsync("Rawdata", JSON.stringify(content));
 
-            adapter.setObjectNotExists("Rawdata", {
-                    type: "state",
-                    common: {
-                        name: "Rawdata",
-                        type: "string",
-                        role: "value",
-                        desc: "Beinhaltet die Rohdaten des Abfrageergebnisses als JSON",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-            adapter.setState("Rawdata", body);
-			
-            let array = JSON.parse(body).data;
+            let array = content.data;
 
             for(let i = 0; i < array.length; i++) {
                 let stateBaseName = "prices." + i + ".";
-                adapter.setObjectNotExists(stateBaseName + "start", {
+ 
+                //ensure all necessary data points exist
+                await adapter.setObjectNotExistsAsync(stateBaseName + "start", {
                     type: "state",
                     common: {
                         name: "Gultigkeitsbeginn (Uhrzeit)",
@@ -148,7 +153,7 @@ async function main() {
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "startDate", {
+                await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
                     type: "state",
                     common: {
                         name: "Gultigkeitsbeginn (Datum)",
@@ -161,7 +166,7 @@ async function main() {
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "end", {
+                await adapter.setObjectNotExistsAsync(stateBaseName + "end", {
                     type: "state",
                     common: {
                         name: "Gultigkeitsende (Uhrzeit)",
@@ -173,7 +178,7 @@ async function main() {
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "endDate", {
+                await adapter.setObjectNotExistsAsync(stateBaseName + "endDate", {
                     type: "state",
                     common: {
                         name: "Gultigkeitsende (Datum)",
@@ -185,7 +190,7 @@ async function main() {
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "nettoPriceKwh", {
+                await adapter.setObjectNotExistsAsync(stateBaseName + "nettoPriceKwh", {
                     type: "state",
                     common: {
                         name: "Preis pro KWh (excl. MwSt.)",
@@ -198,7 +203,7 @@ async function main() {
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "bruttoPriceKwh", {
+                await adapter.setObjectNotExistsAsync(stateBaseName + "bruttoPriceKwh", {
                     type: "state",
                     common: {
                         name: "Preis pro KWh (incl. MwSt.)",
@@ -211,7 +216,7 @@ async function main() {
                     native: {}
                 });
 
-                adapter.setObjectNotExists(stateBaseName + "totalPriceKwh", {
+                await adapter.setObjectNotExistsAsync(stateBaseName + "totalPriceKwh", {
                     type: "state",
                     common: {
                         name: "Gesamtpreis pro KWh (incl. MwSt.)",
@@ -224,6 +229,7 @@ async function main() {
                     native: {}
                 });
 
+                //calculate prices / timestamps
                 let start = new Date(array[i].start_timestamp);
                 let startTime = start.toLocaleTimeString('de-DE');
                 let startDate = start.toLocaleDateString('de-DE');
@@ -234,15 +240,19 @@ async function main() {
                 let bruttoPriceKwh = nettoPriceKwh * mwstRate; 
                 let toalPriceKwh = bruttoPriceKwh + workRate ; 
 
-                adapter.setState(stateBaseName + "start", startTime);
-                adapter.setState(stateBaseName + "startDate", startDate);
-                adapter.setState(stateBaseName + "end", endTime);
-                adapter.setState(stateBaseName + "endDate", endDate);
-                adapter.setState(stateBaseName + "nettoPriceKwh", nettoPriceKwh);
-                adapter.setState(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh);
-                adapter.setState(stateBaseName + "totalPriceKwh", toalPriceKwh);
+                //write prices / timestamps to their data points
+                await adapter.setStateAsync(stateBaseName + "start", startTime);
+                await adapter.setStateAsync(stateBaseName + "startDate", startDate);
+                await adapter.setStateAsync(stateBaseName + "end", endTime);
+                await adapter.setStateAsync(stateBaseName + "endDate", endDate);
+                await adapter.setStateAsync(stateBaseName + "nettoPriceKwh", nettoPriceKwh);
+                await adapter.setStateAsync(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh);
+                await adapter.setStateAsync(stateBaseName + "totalPriceKwh", toalPriceKwh);
             }
 
+            adapter.log.debug('all prices written to their data points');
+
+            //ordered prices
             let sortedArray = array.sort(compareValues("marketprice", "asc"));
             let j= 0;
 
@@ -253,7 +263,8 @@ async function main() {
                 if (start >= loadingThresholdStartDateTime && end < loadingThresholdEndDateTime) {
                     let stateBaseName = "pricesOrdered." + j + ".";
 
-                    adapter.setObjectNotExists(stateBaseName + "start", {
+                    //ensure all necessary data points exist
+                    await adapter.setObjectNotExistsAsync(stateBaseName + "start", {
                         type: "state",
                         common: {
                             name: "Gultigkeitsbeginn (Uhrzeit)",
@@ -266,7 +277,7 @@ async function main() {
                         native: {}
                     });
     
-                    adapter.setObjectNotExists(stateBaseName + "startDate", {
+                    await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
                         type: "state",
                         common: {
                             name: "Gultigkeitsbeginn (Datum)",
@@ -279,7 +290,7 @@ async function main() {
                         native: {}
                     });
     
-                    adapter.setObjectNotExists(stateBaseName + "end", {
+                    await adapter.setObjectNotExistsAsync(stateBaseName + "end", {
                         type: "state",
                         common: {
                             name: "Gultigkeitsende (Uhrzeit)",
@@ -291,7 +302,7 @@ async function main() {
                         native: {}
                     });
     
-                    adapter.setObjectNotExists(stateBaseName + "endDate", {
+                    await adapter.setObjectNotExistsAsync(stateBaseName + "endDate", {
                         type: "state",
                         common: {
                             name: "Gultigkeitsende (Datum)",
@@ -303,25 +314,27 @@ async function main() {
                         native: {}
                     });
     
-                adapter.setObjectNotExists(stateBaseName + "priceKwh", {
-                    type: "state",
-                    common: {
-                        name: "Preis pro KWh (excl. MwSt.)",
-                        type: "number",
-                        role: "value",
-                        unit: "Cent / KWh",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
+                    await adapter.setObjectNotExistsAsync(stateBaseName + "priceKwh", {
+                        type: "state",
+                        common: {
+                            name: "Preis pro KWh (excl. MwSt.)",
+                            type: "number",
+                            role: "value",
+                            unit: "Cent / KWh",
+                            read: true,
+                            write: false
+                        },
+                        native: {}
+                    });
 
+                    //calculate prices / timestamps
                     let startTime = start.toLocaleTimeString('de-DE');
                     let startDate = start.toLocaleDateString('de-DE');
                     let endTime = end.toLocaleTimeString('de-DE');
                     let endDate = end.toLocaleDateString('de-DE');
                     let priceKwh = array[k].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
 
+                    //write prices / timestamps to their data points
                     adapter.setState(stateBaseName + "start", startTime);
                     adapter.setState(stateBaseName + "startDate", startDate);
                     adapter.setState(stateBaseName + "end", endTime);
@@ -333,13 +346,25 @@ async function main() {
 
             }
 
+            adapter.log.debug('all ordered prices written to their data points');
         }
-    });
+    ).catch(
+        (error) => {
+            if (error.response) {
+                // The request was made and the server responded with a status code
 
-    setTimeout(function() {
-        adapter.stop();
-    }, 10000)
-    
+                this.log.warn('received error ' + error.response.status + ' response from local sensor ' + sensorIdentifier + ' with content: ' + JSON.stringify(error.response.data));
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js<div></div>
+                this.log.error(error.message);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                this.log.error(error.message);
+            }
+        }
+    );    
 }
 
 // @ts-ignore parent is a valid property on module
