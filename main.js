@@ -356,11 +356,11 @@ async function main() {
             let priceKwh = array[k].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
 
             //write prices / timestamps to their data points
-            adapter.setState(stateBaseName + "start", startTime, true);
-            adapter.setState(stateBaseName + "startDate", startDate, true);
-            adapter.setState(stateBaseName + "end", endTime, true);
-            adapter.setState(stateBaseName + "endDate", endDate, true);
-            adapter.setState(stateBaseName + "priceKwh", priceKwh, true);
+            await adapter.setStateAsync(stateBaseName + "start", startTime, true);
+            await adapter.setStateAsync(stateBaseName + "startDate", startDate, true);
+            await adapter.setStateAsync(stateBaseName + "end", endTime, true);
+            await adapter.setStateAsync(stateBaseName + "endDate", endDate, true);
+            await adapter.setStateAsync(stateBaseName + "priceKwh", priceKwh, true);
 
             j++;
         }
