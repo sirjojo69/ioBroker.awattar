@@ -107,248 +107,16 @@ async function main() {
 
     adapter.log.debug('local request started');
 
-    axios({
-        method: 'get',
-        baseURL: urlEpoch,
-        timeout: 10000,
-        responseType: 'json'
-    }).then(
-        async (response) => {
-            const content = response.data;
+    let response;
 
-            adapter.log.debug('local request done');
-            adapter.log.debug('received data (' + response.status + '): ' + JSON.stringify(content));
-
-            //write raw data to data point
-            await adapter.setObjectNotExistsAsync("Rawdata", {
-                type: "state",
-                common: {
-                    name: "Rawdata",
-                    type: "string",
-                    role: "value",
-                    desc: "Beinhaltet die Rohdaten des Abfrageergebnisses als JSON",
-                    read: true,
-                    write: false
-                },
-                native: {}
-            });
-            await adapter.setStateAsync("Rawdata", JSON.stringify(content));
-
-            let array = content.data;
-
-            for(let i = 0; i < array.length; i++) {
-                let stateBaseName = "prices." + i + ".";
- 
-                //ensure all necessary data points exist
-                await adapter.setObjectNotExistsAsync(stateBaseName + "start", {
-                    type: "state",
-                    common: {
-                        name: "Gultigkeitsbeginn (Uhrzeit)",
-                        type: "string",
-                        role: "value",
-                        desc: "Uhrzeit des Beginns der Gültigkeit des Preises",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-
-                await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
-                    type: "state",
-                    common: {
-                        name: "Gultigkeitsbeginn (Datum)",
-                        type: "string",
-                        role: "value",
-                        desc: "Datum des Beginns der Gültigkeit des Preises",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-
-                await adapter.setObjectNotExistsAsync(stateBaseName + "end", {
-                    type: "state",
-                    common: {
-                        name: "Gultigkeitsende (Uhrzeit)",
-                        type: "string",
-                        role: "value",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-
-                await adapter.setObjectNotExistsAsync(stateBaseName + "endDate", {
-                    type: "state",
-                    common: {
-                        name: "Gultigkeitsende (Datum)",
-                        type: "string",
-                        role: "value",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-
-                await adapter.setObjectNotExistsAsync(stateBaseName + "nettoPriceKwh", {
-                    type: "state",
-                    common: {
-                        name: "Preis pro KWh (excl. MwSt.)",
-                        type: "number",
-                        role: "value",
-                        unit: "Cent / KWh",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-
-                await adapter.setObjectNotExistsAsync(stateBaseName + "bruttoPriceKwh", {
-                    type: "state",
-                    common: {
-                        name: "Preis pro KWh (incl. MwSt.)",
-                        type: "number",
-                        role: "value",
-                        unit: "Cent / KWh",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-
-                await adapter.setObjectNotExistsAsync(stateBaseName + "totalPriceKwh", {
-                    type: "state",
-                    common: {
-                        name: "Gesamtpreis pro KWh (incl. MwSt.)",
-                        type: "number",
-                        role: "value",
-                        unit: "Cent / KWh",
-                        read: true,
-                        write: false
-                    },
-                    native: {}
-                });
-
-                //calculate prices / timestamps
-                let start = new Date(array[i].start_timestamp);
-                let startTime = start.toLocaleTimeString('de-DE');
-                let startDate = start.toLocaleDateString('de-DE');
-                let end = new Date(array[i].end_timestamp);
-                let endTime = end.toLocaleTimeString('de-DE');
-                let endDate = end.toLocaleDateString('de-DE');
-                let nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
-                let bruttoPriceKwh = nettoPriceKwh * mwstRate; 
-                let toalPriceKwh = bruttoPriceKwh + workRate ; 
-
-                //write prices / timestamps to their data points
-                await adapter.setStateAsync(stateBaseName + "start", startTime);
-                await adapter.setStateAsync(stateBaseName + "startDate", startDate);
-                await adapter.setStateAsync(stateBaseName + "end", endTime);
-                await adapter.setStateAsync(stateBaseName + "endDate", endDate);
-                await adapter.setStateAsync(stateBaseName + "nettoPriceKwh", nettoPriceKwh);
-                await adapter.setStateAsync(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh);
-                await adapter.setStateAsync(stateBaseName + "totalPriceKwh", toalPriceKwh);
-            }
-
-            adapter.log.debug('all prices written to their data points');
-
-            //ordered prices
-            let sortedArray = array.sort(compareValues("marketprice", "asc"));
-            let j= 0;
-
-            for(let k = 0; k < sortedArray.length; k++) {
-                let start = new Date(array[k].start_timestamp);
-                let end = new Date(array[k].end_timestamp);
-
-                if (start >= loadingThresholdStartDateTime && end < loadingThresholdEndDateTime) {
-                    let stateBaseName = "pricesOrdered." + j + ".";
-
-                    //ensure all necessary data points exist
-                    await adapter.setObjectNotExistsAsync(stateBaseName + "start", {
-                        type: "state",
-                        common: {
-                            name: "Gultigkeitsbeginn (Uhrzeit)",
-                            type: "string",
-                            role: "value",
-                            desc: "Uhrzeit des Beginns der Gültigkeit des Preises",
-                            read: true,
-                            write: false
-                        },
-                        native: {}
-                    });
-    
-                    await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
-                        type: "state",
-                        common: {
-                            name: "Gultigkeitsbeginn (Datum)",
-                            type: "string",
-                            role: "value",
-                            desc: "Datum des Beginns der Gültigkeit des Preises",
-                            read: true,
-                            write: false
-                        },
-                        native: {}
-                    });
-    
-                    await adapter.setObjectNotExistsAsync(stateBaseName + "end", {
-                        type: "state",
-                        common: {
-                            name: "Gultigkeitsende (Uhrzeit)",
-                            type: "string",
-                            role: "value",
-                            read: true,
-                            write: false
-                        },
-                        native: {}
-                    });
-    
-                    await adapter.setObjectNotExistsAsync(stateBaseName + "endDate", {
-                        type: "state",
-                        common: {
-                            name: "Gultigkeitsende (Datum)",
-                            type: "string",
-                            role: "value",
-                            read: true,
-                            write: false
-                        },
-                        native: {}
-                    });
-    
-                    await adapter.setObjectNotExistsAsync(stateBaseName + "priceKwh", {
-                        type: "state",
-                        common: {
-                            name: "Preis pro KWh (excl. MwSt.)",
-                            type: "number",
-                            role: "value",
-                            unit: "Cent / KWh",
-                            read: true,
-                            write: false
-                        },
-                        native: {}
-                    });
-
-                    //calculate prices / timestamps
-                    let startTime = start.toLocaleTimeString('de-DE');
-                    let startDate = start.toLocaleDateString('de-DE');
-                    let endTime = end.toLocaleTimeString('de-DE');
-                    let endDate = end.toLocaleDateString('de-DE');
-                    let priceKwh = array[k].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
-
-                    //write prices / timestamps to their data points
-                    adapter.setState(stateBaseName + "start", startTime);
-                    adapter.setState(stateBaseName + "startDate", startDate);
-                    adapter.setState(stateBaseName + "end", endTime);
-                    adapter.setState(stateBaseName + "endDate", endDate);
-                    adapter.setState(stateBaseName + "priceKwh", priceKwh);
-
-                    j++;
-                }
-
-            }
-
-            adapter.log.debug('all ordered prices written to their data points');
-        }
-    ).catch(
+    try {
+        response = await axios({
+            method: 'get',
+            baseURL: urlEpoch,
+            timeout: 10000,
+            responseType: 'json'
+       });
+     } catch (error) {
         (error) => {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -364,7 +132,243 @@ async function main() {
                 this.log.error(error.message);
             }
         }
-    );    
+       return;
+     }
+ 
+    const content = response.data;
+
+    adapter.log.debug('local request done');
+    adapter.log.debug('received data (' + response.status + '): ' + JSON.stringify(content));
+
+    //write raw data to data point
+    await adapter.setObjectNotExistsAsync("Rawdata", {
+        type: "state",
+        common: {
+            name: "Rawdata",
+            type: "string",
+            role: "value",
+            desc: "Beinhaltet die Rohdaten des Abfrageergebnisses als JSON",
+            read: true,
+            write: false
+        },
+        native: {}
+    });
+    await adapter.setStateAsync("Rawdata", JSON.stringify(content));
+
+    let array = content.data;
+
+    for(let i = 0; i < array.length; i++) {
+        let stateBaseName = "prices." + i + ".";
+
+        //ensure all necessary data points exist
+        await adapter.setObjectNotExistsAsync(stateBaseName + "start", {
+            type: "state",
+            common: {
+                name: "Gultigkeitsbeginn (Uhrzeit)",
+                type: "string",
+                role: "value",
+                desc: "Uhrzeit des Beginns der Gültigkeit des Preises",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
+            type: "state",
+            common: {
+                name: "Gultigkeitsbeginn (Datum)",
+                type: "string",
+                role: "value",
+                desc: "Datum des Beginns der Gültigkeit des Preises",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        await adapter.setObjectNotExistsAsync(stateBaseName + "end", {
+            type: "state",
+            common: {
+                name: "Gultigkeitsende (Uhrzeit)",
+                type: "string",
+                role: "value",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        await adapter.setObjectNotExistsAsync(stateBaseName + "endDate", {
+            type: "state",
+            common: {
+                name: "Gultigkeitsende (Datum)",
+                type: "string",
+                role: "value",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        await adapter.setObjectNotExistsAsync(stateBaseName + "nettoPriceKwh", {
+            type: "state",
+            common: {
+                name: "Preis pro KWh (excl. MwSt.)",
+                type: "number",
+                role: "value",
+                unit: "Cent / KWh",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        await adapter.setObjectNotExistsAsync(stateBaseName + "bruttoPriceKwh", {
+            type: "state",
+            common: {
+                name: "Preis pro KWh (incl. MwSt.)",
+                type: "number",
+                role: "value",
+                unit: "Cent / KWh",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        await adapter.setObjectNotExistsAsync(stateBaseName + "totalPriceKwh", {
+            type: "state",
+            common: {
+                name: "Gesamtpreis pro KWh (incl. MwSt.)",
+                type: "number",
+                role: "value",
+                unit: "Cent / KWh",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        //calculate prices / timestamps
+        let start = new Date(array[i].start_timestamp);
+        let startTime = start.toLocaleTimeString('de-DE');
+        let startDate = start.toLocaleDateString('de-DE');
+        let end = new Date(array[i].end_timestamp);
+        let endTime = end.toLocaleTimeString('de-DE');
+        let endDate = end.toLocaleDateString('de-DE');
+        let nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
+        let bruttoPriceKwh = nettoPriceKwh * mwstRate; 
+        let toalPriceKwh = bruttoPriceKwh + workRate ; 
+
+        //write prices / timestamps to their data points
+        await adapter.setStateAsync(stateBaseName + "start", startTime, true);
+        await adapter.setStateAsync(stateBaseName + "startDate", startDate, true);
+        await adapter.setStateAsync(stateBaseName + "end", endTime, true);
+        await adapter.setStateAsync(stateBaseName + "endDate", endDate, true);
+        await adapter.setStateAsync(stateBaseName + "nettoPriceKwh", nettoPriceKwh, true);
+        await adapter.setStateAsync(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh, true);
+        await adapter.setStateAsync(stateBaseName + "totalPriceKwh", toalPriceKwh, true);
+    }
+
+    adapter.log.debug('all prices written to their data points');
+
+    //ordered prices
+    let sortedArray = array.sort(compareValues("marketprice", "asc"));
+    let j= 0;
+
+    for(let k = 0; k < sortedArray.length; k++) {
+        let start = new Date(array[k].start_timestamp);
+        let end = new Date(array[k].end_timestamp);
+
+        if (start >= loadingThresholdStartDateTime && end < loadingThresholdEndDateTime) {
+            let stateBaseName = "pricesOrdered." + j + ".";
+
+            //ensure all necessary data points exist
+            await adapter.setObjectNotExistsAsync(stateBaseName + "start", {
+                type: "state",
+                common: {
+                    name: "Gultigkeitsbeginn (Uhrzeit)",
+                    type: "string",
+                    role: "value",
+                    desc: "Uhrzeit des Beginns der Gültigkeit des Preises",
+                    read: true,
+                    write: false
+                },
+                native: {}
+            });
+
+            await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
+                type: "state",
+                common: {
+                    name: "Gultigkeitsbeginn (Datum)",
+                    type: "string",
+                    role: "value",
+                    desc: "Datum des Beginns der Gültigkeit des Preises",
+                    read: true,
+                    write: false
+                },
+                native: {}
+            });
+
+            await adapter.setObjectNotExistsAsync(stateBaseName + "end", {
+                type: "state",
+                common: {
+                    name: "Gultigkeitsende (Uhrzeit)",
+                    type: "string",
+                    role: "value",
+                    read: true,
+                    write: false
+                },
+                native: {}
+            });
+
+            await adapter.setObjectNotExistsAsync(stateBaseName + "endDate", {
+                type: "state",
+                common: {
+                    name: "Gultigkeitsende (Datum)",
+                    type: "string",
+                    role: "value",
+                    read: true,
+                    write: false
+                },
+                native: {}
+            });
+
+            await adapter.setObjectNotExistsAsync(stateBaseName + "priceKwh", {
+                type: "state",
+                common: {
+                    name: "Preis pro KWh (excl. MwSt.)",
+                    type: "number",
+                    role: "value",
+                    unit: "Cent / KWh",
+                    read: true,
+                    write: false
+                },
+                native: {}
+            });
+
+            //calculate prices / timestamps
+            let startTime = start.toLocaleTimeString('de-DE');
+            let startDate = start.toLocaleDateString('de-DE');
+            let endTime = end.toLocaleTimeString('de-DE');
+            let endDate = end.toLocaleDateString('de-DE');
+            let priceKwh = array[k].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
+
+            //write prices / timestamps to their data points
+            adapter.setState(stateBaseName + "start", startTime, true);
+            adapter.setState(stateBaseName + "startDate", startDate, true);
+            adapter.setState(stateBaseName + "end", endTime, true);
+            adapter.setState(stateBaseName + "endDate", endDate, true);
+            adapter.setState(stateBaseName + "priceKwh", priceKwh, true);
+
+            j++;
+        }
+
+    }
+
+    adapter.log.debug('all ordered prices written to their data points');
+   
 }
 
 // @ts-ignore parent is a valid property on module
