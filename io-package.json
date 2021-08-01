@@ -27,25 +27,65 @@
         "type": "utility",
         "news": {
             "1.0.0": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung"
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "изначальный выпуск",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "初始发行"
             },
             "1.0.2": {
-                "en": "deleted admin tab",
-                "de": "admin tab rausgenommen"
+				"en": "deleted admin tab",
+				"de": "Admin-Tab gelöscht",
+				"ru": "удаленная вкладка администратора",
+				"pt": "aba admin excluída",
+				"nl": "verwijderd admin-tabblad",
+				"fr": "onglet administrateur supprimé",
+				"it": "scheda amministratore cancellata",
+				"es": "pestaña de administrador eliminada",
+				"pl": "usunięta karta administratora",
+				"zh-cn": "删除了管理标签"
             },
             "1.0.3": {
-                "en": "customized some settings",
-                "de": "einige Einstellungen verändert"
+				"en": "customized some settings",
+				"de": "einige Einstellungen angepasst",
+				"ru": "изменил некоторые настройки",
+				"pt": "personalizou algumas configurações",
+				"nl": "enkele instellingen aangepast",
+				"fr": "personnalisé certains paramètres",
+				"it": "personalizzato alcune impostazioni",
+				"es": "personalizar algunas configuraciones",
+				"pl": "dostosować niektóre ustawienia",
+				"zh-cn": "自定义一些设置"
             },
-            "1.0.5": {
-                "en": "added total price and price incl. vat, API call incl. Parameter start and end",
-                "de": "Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende"
-            }
+          "1.0.5": {
+            "en": "added total price and price incl. vat, API call incl. Parameter start and end",
+            "de": "zuzüglich Gesamtpreis und Preis inkl. MwSt., API-Aufruf inkl. Parameter Start und Ende",
+            "ru": "добавлена общая цена и цена вкл. НДС, вызов API, вкл. Начало и конец параметра",
+            "pt": "adicionado preço total e preço incl. IVA, chamada de API incl. Parâmetro de início e fim",
+            "nl": "toegevoegde totaalprijs en prijs incl. btw, API-aanroep incl. Parameter begin en einde",
+            "fr": "prix total ajouté et prix incl. tva, appel API incl. Début et fin des paramètres",
+            "it": "aggiunto prezzo totale e prezzo incl. iva, chiamata API incl. Inizio e fine del parametro",
+            "es": "precio total añadido y precio incl. iva, llamada API incl. Inicio y fin de parámetros",
+            "pl": "dodana cena całkowita i cena włącznie. vat, wywołanie API Początek i koniec parametru",
+            "zh-cn": "添加总价和价格包括。增值税，API 调用包括。参数开始和结束"
+          }
         },
         "titleLang": {
             "en": "aWATTar",
-            "de": "aWATTar"
+            "de": "aWATTar",
+            "ru": "aWATTar",
+            "pt": "aWATTar",
+            "nl": "aWATTar",
+            "fr": "aWATTar",
+            "it": "aWATTar",
+            "es": "aWATTar",
+            "pl": "aWATtar",
+            "zh-cn": "阿瓦塔"
         },
         "main": "main.js",
         "compact": true,

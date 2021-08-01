@@ -20,6 +20,12 @@
 
 
 ## aWATTar adapter for ioBroker
+
+This adapter reads the hourly prices for the coming day of the electricity provider <a href="https://www.awattar.de/" target="_blank"> aWATTar </a>
+for the hourly and hourly CAP tariffs.
+With this information you can then control when e.g. your electric car or the home storage should be charged (namely at the cheapest time).
+Since this provider offers its services only in Austria and Germany the detailed description is just in german.
+
 Dieser Adapter liest die Stunden Preise für den kommenden Tag des Stromanbieters <a href="https://www.awattar.de/" target="_blank">aWATTar</a>
 für die Tarife hourly und hourly CAP.
 Mit dieser Information kann man dann steuern wann z.b. das Elektroauto oder der Hausspeicher geladen werden soll (nämlich zur billigsten Zeit).
@@ -44,27 +50,25 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 
 ## Changelog
 
-### 0.0.1
-* (SirJojo69) initial release.
-
-### 1.0.0
-* (SirJojo69) first stable release.
-
-### 1.0.1
-* (SirJojo69) deleted admin tab.
+### 1.0.5
+* (SirJojo69) Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende. some internal fixes.
 
 ### 1.0.3
 * (SirJojo69) einige Einstellungen verändert.
 
-### 1.0.5
-* (SirJojo69) Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende. some internal fixes.
+### 1.0.1
+* (SirJojo69) deleted admin tab.
 
+### 1.0.0
+* (SirJojo69) first stable release.
 
+### 0.0.1
+* (SirJojo69) initial release.
 
 ## License
 MIT License
 
-Copyright (c) 2020 SirJojo69 <gtj.howe@gmx.de>
+Copyright (c) 2020 - 2021 SirJojo69 <gtj.howe@gmx.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

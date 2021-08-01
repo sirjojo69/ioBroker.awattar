@@ -1,4 +1,4 @@
-  // @ts-nocheck
+// @ts-nocheck
 "use strict";
 
 const { Adapter } = require("@iobroker/adapter-core");
@@ -107,8 +107,8 @@ async function main() {
 
     adapter.log.debug('local request started');
 
+    //get data from awattar api
     let response;
-
     try {
         response = await axios({
             method: 'get',
@@ -262,13 +262,15 @@ async function main() {
         let toalPriceKwh = bruttoPriceKwh + workRate ; 
 
         //write prices / timestamps to their data points
-        await adapter.setStateAsync(stateBaseName + "start", startTime, true);
-        await adapter.setStateAsync(stateBaseName + "startDate", startDate, true);
-        await adapter.setStateAsync(stateBaseName + "end", endTime, true);
-        await adapter.setStateAsync(stateBaseName + "endDate", endDate, true);
-        await adapter.setStateAsync(stateBaseName + "nettoPriceKwh", nettoPriceKwh, true);
-        await adapter.setStateAsync(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh, true);
-        await adapter.setStateAsync(stateBaseName + "totalPriceKwh", toalPriceKwh, true);
+        await Promise.all(
+            [adapter.setStateAsync(stateBaseName + "start", startTime, true)
+            ,adapter.setStateAsync(stateBaseName + "startDate", startDate, true)
+            ,adapter.setStateAsync(stateBaseName + "end", endTime, true)
+            ,adapter.setStateAsync(stateBaseName + "endDate", endDate, true)
+            ,adapter.setStateAsync(stateBaseName + "nettoPriceKwh", nettoPriceKwh, true)
+            ,adapter.setStateAsync(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh, true)
+            ,adapter.setStateAsync(stateBaseName + "totalPriceKwh", toalPriceKwh, true)
+            ])
     }
 
     adapter.log.debug('all prices written to their data points');
@@ -356,12 +358,14 @@ async function main() {
             let priceKwh = array[k].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
 
             //write prices / timestamps to their data points
-            await adapter.setStateAsync(stateBaseName + "start", startTime, true);
-            await adapter.setStateAsync(stateBaseName + "startDate", startDate, true);
-            await adapter.setStateAsync(stateBaseName + "end", endTime, true);
-            await adapter.setStateAsync(stateBaseName + "endDate", endDate, true);
-            await adapter.setStateAsync(stateBaseName + "priceKwh", priceKwh, true);
-
+            await Promise.all(
+                [adapter.setStateAsync(stateBaseName + "start", startTime, true)
+                ,adapter.setStateAsync(stateBaseName + "start", startTime, true)
+                ,adapter.setStateAsync(stateBaseName + "startDate", startDate, true)
+                ,adapter.setStateAsync(stateBaseName + "end", endTime, true)
+                ,adapter.setStateAsync(stateBaseName + "endDate", endDate, true)
+                ,adapter.setStateAsync(stateBaseName + "priceKwh", priceKwh, true)
+                ])
             j++;
         }
 
