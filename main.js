@@ -372,6 +372,10 @@ async function main() {
     }
 
     adapter.log.debug('all ordered prices written to their data points');
+
+    setTimeout(function () {
+        adapter.stop();
+    }, 10000)
    
 }
 
