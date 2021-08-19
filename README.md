@@ -50,6 +50,9 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 
 ## Changelog
 
+### 1.0.6
+* (SirJojo69) new version for official repo
+
 ### 1.0.5
 * (SirJojo69) Gesamtpreis und Bruttopreis hinzugefügt, API Aufruf mit start und ende. some internal fixes.
 
