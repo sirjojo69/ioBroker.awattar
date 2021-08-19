@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.0.5",
+        "version": "1.0.6",
         "title": "aWATTar",
         "desc": {
             "en": "reads out hourly prices from aWATTar",
