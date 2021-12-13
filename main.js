@@ -153,7 +153,7 @@ async function main() {
         },
         native: {}
     });
-    await adapter.setStateAsync("Rawdata", JSON.stringify(content));
+    await adapter.setStateAsync("Rawdata", JSON.stringify(content), true);
 
     let array = content.data;
 
@@ -174,6 +174,19 @@ async function main() {
             native: {}
         });
 
+        await adapter.setObjectNotExistsAsync(stateBaseName + "startTimestamp", {
+            type: "state",
+            common: {
+                name: "startTimestamp",
+                type: "number",
+                role: "value",
+                desc: "Timestamp des Beginns der Gültigkeit des Preises",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+		
         await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
             type: "state",
             common: {
@@ -193,6 +206,19 @@ async function main() {
                 name: "Gultigkeitsende (Uhrzeit)",
                 type: "string",
                 role: "value",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
+        await adapter.setObjectNotExistsAsync(stateBaseName + "endTimestamp", {
+            type: "state",
+            common: {
+                name: "endTimestamp",
+                type: "number",
+                role: "value",
+                desc: "Timestamp des Endes der Gültigkeit des Preises",
                 read: true,
                 write: false
             },
@@ -251,10 +277,12 @@ async function main() {
         });
 
         //calculate prices / timestamps
-        let start = new Date(array[i].start_timestamp);
+		let startTs = array[i].start_timestamp;
+        let start = new Date(startTs);
         let startTime = start.toLocaleTimeString('de-DE');
         let startDate = start.toLocaleDateString('de-DE');
-        let end = new Date(array[i].end_timestamp);
+		let endTs = array[i].end_timestamp;
+        let end = new Date(endTs);
         let endTime = end.toLocaleTimeString('de-DE');
         let endDate = end.toLocaleDateString('de-DE');
         let nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
@@ -264,8 +292,10 @@ async function main() {
         //write prices / timestamps to their data points
         await Promise.all(
             [adapter.setStateAsync(stateBaseName + "start", startTime, true)
-            ,adapter.setStateAsync(stateBaseName + "startDate", startDate, true)
+            ,adapter.setStateAsync(stateBaseName + "startTimestamp", startTs, true)
+			,adapter.setStateAsync(stateBaseName + "startDate", startDate, true)
             ,adapter.setStateAsync(stateBaseName + "end", endTime, true)
+			,adapter.setStateAsync(stateBaseName + "endTimestamp", endTs, true)
             ,adapter.setStateAsync(stateBaseName + "endDate", endDate, true)
             ,adapter.setStateAsync(stateBaseName + "nettoPriceKwh", nettoPriceKwh, true)
             ,adapter.setStateAsync(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh, true)
@@ -280,8 +310,10 @@ async function main() {
     let j= 0;
 
     for(let k = 0; k < sortedArray.length; k++) {
-        let start = new Date(array[k].start_timestamp);
-        let end = new Date(array[k].end_timestamp);
+		let startTs = array[k].start_timestamp;
+        let start = new Date(startTs);
+		let endTs = array[k].end_timestamp;
+        let end = new Date(endTs);
 
         if (start >= loadingThresholdStartDateTime && end < loadingThresholdEndDateTime) {
             let stateBaseName = "pricesOrdered." + j + ".";
@@ -299,6 +331,19 @@ async function main() {
                 },
                 native: {}
             });
+
+			await adapter.setObjectNotExistsAsync(stateBaseName + "startTimestamp", {
+				type: "state",
+				common: {
+					name: "startTimestamp",
+					type: "number",
+					role: "value",
+					desc: "Timestamp des Beginns der Gültigkeit des Preises",
+					read: true,
+					write: false
+				},
+				native: {}
+			});
 
             await adapter.setObjectNotExistsAsync(stateBaseName + "startDate", {
                 type: "state",
@@ -324,6 +369,19 @@ async function main() {
                 },
                 native: {}
             });
+
+			await adapter.setObjectNotExistsAsync(stateBaseName + "endTimestamp", {
+				type: "state",
+				common: {
+					name: "endTimestamp",
+					type: "number",
+					role: "value",
+					desc: "Timestamp des Endes der Gültigkeit des Preises",
+					read: true,
+					write: false
+				},
+				native: {}
+			});
 
             await adapter.setObjectNotExistsAsync(stateBaseName + "endDate", {
                 type: "state",
@@ -360,9 +418,10 @@ async function main() {
             //write prices / timestamps to their data points
             await Promise.all(
                 [adapter.setStateAsync(stateBaseName + "start", startTime, true)
-                ,adapter.setStateAsync(stateBaseName + "start", startTime, true)
+                ,adapter.setStateAsync(stateBaseName + "startTimestamp", startTs, true)
                 ,adapter.setStateAsync(stateBaseName + "startDate", startDate, true)
                 ,adapter.setStateAsync(stateBaseName + "end", endTime, true)
+				,adapter.setStateAsync(stateBaseName + "endTimestamp", endTs, true)
                 ,adapter.setStateAsync(stateBaseName + "endDate", endDate, true)
                 ,adapter.setStateAsync(stateBaseName + "priceKwh", priceKwh, true)
                 ])
