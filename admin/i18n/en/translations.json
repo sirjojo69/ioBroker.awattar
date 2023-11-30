@@ -1,5 +1,6 @@
 {
     "aWATTarApiUrl": "URL for aWATTar API",
+    "aWATTarApiPowerUrl": "Additional aWATTar API URL for power source info",
     "LoadingThresholdStart": "Start Threshold Loading (e.g. for EV)",
     "LoadingThresholdEnd": "End Threshold Loading"
 }

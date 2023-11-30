@@ -1,5 +1,6 @@
 {
     "aWATTarApiUrl": "URL für aWATTar API",
+    "aWATTarApiPowerUrl": "Zusätzliche aWATTar API URL für Infos über die Quelle der Energie",
     "LoadingThresholdStart": "Start Zeitraum nach Preis sortiert",
     "LoadingThresholdEnd": "End Zeitraum nach Preis sortiert"
 }
