@@ -321,7 +321,7 @@ async function main() {
                 name: "Sonnenenergie",
                 type: "number",
                 role: "value",
-                unit: "GWh",
+                unit: "kWh",
                 read: true,
                 write: false
             },
@@ -334,7 +334,7 @@ async function main() {
                 name: "Windenergie",
                 type: "number",
                 role: "value",
-                unit: "GWh",
+                unit: "kWh",
                 read: true,
                 write: false
             },
