@@ -301,7 +301,7 @@ async function main() {
         let endTime = end.toLocaleTimeString('de-DE');
         let endDate = end.toLocaleDateString('de-DE');
         let nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
-        let nettoFullPriceKwh = nettoPriceKwh + (math.abs(nettoPriceKwh) * absPriceFactor) + constantCosts;
+        let nettoFullPriceKwh = nettoPriceKwh + (Math.abs(nettoPriceKwh) * absPriceFactor) + constantCosts;
         let bruttoPriceKwh = nettoFullPriceKwh * mwstRate;
         let totalPriceKwh = bruttoPriceKwh + workRate ;
 
