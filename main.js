@@ -92,6 +92,8 @@ async function main() {
     const mwst = parseInt(adapter.config.MWstRate);
     const mwstRate = (mwst + 100) / 100;
     const workRate = parseFloat(adapter.config.WorkRate);
+    const absPriceFactor = parseFloat(adapter.config.absPriceFactor);
+    const constantCosts = parseFloat(adapter.config.constantCosts);
     const loadingThresholdStart = adapter.config.LoadingThresholdStart;
     if (isNaN(parseInt(loadingThresholdStart))) {return adapter.log.error("loadingThresholdStart NaN")}
     const loadingThresholdEnd = adapter.config.LoadingThresholdEnd;
@@ -250,6 +252,19 @@ async function main() {
             native: {}
         });
 
+        await adapter.setObjectNotExistsAsync(stateBaseName + "nettoFullPriceKwh", {
+            type: "state",
+            common: {
+                name: "Preis pro KWh (excl. MwSt., incl. Betreiberkosten)",
+                type: "number",
+                role: "value",
+                unit: "Cent / KWh",
+                read: true,
+                write: false
+            },
+            native: {}
+        });
+
         await adapter.setObjectNotExistsAsync(stateBaseName + "bruttoPriceKwh", {
             type: "state",
             common: {
@@ -286,8 +301,9 @@ async function main() {
         let endTime = end.toLocaleTimeString('de-DE');
         let endDate = end.toLocaleDateString('de-DE');
         let nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
-        let bruttoPriceKwh = nettoPriceKwh * mwstRate; 
-        let toalPriceKwh = bruttoPriceKwh + workRate ; 
+        let nettoFullPriceKwh = nettoPriceKwh + (math.abs(nettoPriceKwh) * absPriceFactor) + constantCosts;
+        let bruttoPriceKwh = nettoFullPriceKwh * mwstRate;
+        let totalPriceKwh = bruttoPriceKwh + workRate ;
 
         //write prices / timestamps to their data points
         await Promise.all(
@@ -298,8 +314,9 @@ async function main() {
 			,adapter.setStateAsync(stateBaseName + "endTimestamp", endTs, true)
             ,adapter.setStateAsync(stateBaseName + "endDate", endDate, true)
             ,adapter.setStateAsync(stateBaseName + "nettoPriceKwh", nettoPriceKwh, true)
+            ,adapter.setStateAsync(stateBaseName + "nettoFullPriceKwh", nettoFullPriceKwh, true)
             ,adapter.setStateAsync(stateBaseName + "bruttoPriceKwh", bruttoPriceKwh, true)
-            ,adapter.setStateAsync(stateBaseName + "totalPriceKwh", toalPriceKwh, true)
+            ,adapter.setStateAsync(stateBaseName + "totalPriceKwh", totalPriceKwh, true)
             ])
     }
 
