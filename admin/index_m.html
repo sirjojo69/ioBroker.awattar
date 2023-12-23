@@ -1,7 +1,7 @@
 <html>
 
 <head>
-
+    <meta charset="UTF-8">
     <!-- Load ioBroker scripts and styles-->
     <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
     <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
@@ -67,7 +67,16 @@
 
         <div class="row">
             <div class="col s12 m4 l2">
-                <img src="awattar.png" class="logo">
+                <img src="awattar.png" class="logo"><br/><br/>
+                <b>ATTENTION:</b> the domain names matter!<br/>
+                e.g. <code>https://api.awattar<strong>.de</strong></code> and <code>https://api.awattar<strong>.at</strong></code> return different values!<br/><br/>
+                Formula for <code>net costs = marketvalue</code> (value from API)<br/>
+                Formula for <code>net full costs = (net costs + ( abs(net costs) * F ) + C )</code><br/>
+                Formula for <code>gross costs = ( net full costs ) * VAT</code><br/>
+                Formula for <code>total costs = gross costs + EXTRA</code><br/><br/>
+                Full formula:<br/>
+                <strong><code>total costs = (net costs + ( abs(net costs) * F ) + C ) * VAT + EXTRA</code></strong> <br/><br/>
+                Just set "F" or "C" to 0 if this is not part of your contract!
             </div>
         </div>
         <div class="row">
@@ -96,8 +105,20 @@
         </div>
         <div class="row">
             <div class="col s6 input-field">
+                <input type="text" class="value" id="absPriceFactor" />
+                <label for="absPriceFactor" class="translate">Factor (F) of the absolute value of the market price to be added to total price.</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 input-field">
+                <input type="text" class="value" id="constantCosts" />
+                <label for="constantCosts" class="translate">Constant (C) costs added per kWh (before VAT).</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6 input-field">
                 <input type="text" class="value" id="WorkRate" />
-                <label for="WorkRate" class="translate">Arbeitspreis ( "Netznutzung" + "Umlagen, Abgaben, Steuern" + "Kosten für Ökostromzertifikate, Abrechnung und Vertrieb", incl. MWSt.)</label>
+                <label for="WorkRate" class="translate">Arbeitspreis (EXTRA) ( "Netznutzung" + "Umlagen, Abgaben, Steuern" + "Kosten für Ökostromzertifikate, Abrechnung und Vertrieb", incl. MWSt.)</label>
             </div>
         </div>
     </div>
