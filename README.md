@@ -54,6 +54,7 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 * (Apollon77) Updates to testing from ioBroker Core team to make testing compatible with js-controller 4.0
 * (SirJojo69) changed copyright
 * (SirJojo69) updated js-controller dependency to 5.0.19
+* (SirJojo69) fixed stat and end date format to DD.MM.YYYY
 
 
 ### 1.0.6
