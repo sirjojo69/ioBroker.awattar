@@ -276,11 +276,11 @@ async function main() {
         const startTs = array[i].start_timestamp;
         const start = new Date(startTs);
         const startTime = start.toLocaleTimeString("de-DE");
-        const startDate = start.toLocaleDateString("de-DE");
+        const startDate = `${start.getDate().toString().padStart(2, "0")}.${(start.getMonth() + 1).toString().padStart(2, "0")}.${start.getFullYear()}`;
         const endTs = array[i].end_timestamp;
         const end = new Date(endTs);
         const endTime = end.toLocaleTimeString("de-DE");
-        const endDate = end.toLocaleDateString("de-DE");
+        const endDate = `${end.getDate().toString().padStart(2, "0")}.${(end.getMonth() + 1).toString().padStart(2, "0")}.${end.getFullYear()}`;
         const nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
         const bruttoPriceKwh = nettoPriceKwh * mwstRate;
         const totalPriceKwh = bruttoPriceKwh + workRate;
