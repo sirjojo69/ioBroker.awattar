@@ -73,7 +73,20 @@
             "es": "precio total añadido y precio incl. iva, llamada API incl. Inicio y fin de parámetros",
             "pl": "dodana cena całkowita i cena włącznie. vat, wywołanie API Początek i koniec parametru",
             "zh-cn": "添加总价和价格包括。增值税，API 调用包括。参数开始和结束"
+          },
+          "1.1.0": {
+            "en": "Updates to testing, copyright, dependencies, some minor fixes",
+            "de": "Updates zu Tests, Urheberrechten, Abhängigkeiten, einige kleinere Korrekturen",
+            "ru": "Обновления тестирования, авторских прав, зависимостей, некоторые незначительные исправления",
+            "pt": "Atualizações para testes, direitos autorais, dependências, algumas correções menores",
+            "nl": "Updates voor testen, auteursrechten, afhankelijkheden, enkele kleine fixes",
+            "fr": "Mises à jour des tests, des droits d'auteur, des dépendances, quelques corrections mineures",
+            "it": "Aggiornamenti ai test, copyright, dipendenze, alcune correzioni minori",
+            "es": "Actualizaciones de pruebas, derechos de autor, dependencias, algunas correcciones menores",
+            "pl": "Aktualizacje testowania, praw autorskich, zależności, kilka drobnych poprawek",
+            "zh-cn": "测试、版权、依赖项更新，一些小修复"
           }
+
         },
         "titleLang": {
             "en": "aWATTar",
