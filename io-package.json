@@ -2,7 +2,7 @@
     "common": {
         "name": "awattar",
         "version": "1.1.0",
-        "tier": "free",
+        "tier": "3",
         "desc": {
             "en": "reads out hourly prices from aWATTar",
             "de": "liest Stundenpreise von der aWATTar Website",
@@ -34,7 +34,7 @@
             "zh-cn"
         ],
         "licenseInformation": {
-            "type": "MIT",
+            "type": "free",
             "url": "https://opensource.org/licenses/MIT"
         },
         "mode": "schedule",

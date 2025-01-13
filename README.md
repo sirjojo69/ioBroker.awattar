@@ -76,6 +76,7 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 * (SirJojo69) initial release.
 
 ## License
+MIT License
 Copyright (c) 2025 SirJojo69 <gtj.howe@gmx.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
