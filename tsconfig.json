@@ -8,7 +8,8 @@
         // check JS files
         "allowJs": true,
         "checkJs": true,
-
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "module": "commonjs",
         "moduleResolution": "node",
         // this is necessary for the automatic typing of the adapter config

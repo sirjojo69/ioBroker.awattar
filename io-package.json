@@ -2,15 +2,41 @@
     "common": {
         "name": "awattar",
         "version": "1.1.0",
-        "title": "aWATTar",
+        "tier": "free",
         "desc": {
             "en": "reads out hourly prices from aWATTar",
-            "de": "liest Stundenpreise von der aWATTar Website"
+            "de": "liest Stundenpreise von der aWATTar Website",
+            "ru": "считывает почасовые цены с aWATTar",
+            "pt": "lê os preços horários do aWATTar",
+            "nl": "leest uurlijks prijzen van aWATTar",
+            "fr": "lit les prix horaires de aWATTar",
+            "it": "legge i prezzi orari da aWATTar",
+            "es": "lee los precios por hora de aWATTar",
+            "pl": "odczytuje ceny godzinowe z aWATTar",
+            "uk": "зчитує погодинні ціни з aWATTar",
+            "zh-cn": "读取 aWATTar 的每小时价格"
         },
         "authors": [
             "SirJojo69 <gtj.howe@gmx.de>"
         ],
         "platform": "Javascript/Node.js",
+        "supportLanguages": [
+            "en",
+            "de",
+            "ru",
+            "pt",
+            "nl",
+            "fr",
+            "it",
+            "es",
+            "pl",
+            "uk",
+            "zh-cn"
+        ],
+        "licenseInformation": {
+            "type": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
         "mode": "schedule",
         "schedule": "0 15 * * *",
         "enabled": true,
@@ -21,46 +47,48 @@
         "extIcon": "https://raw.githubusercontent.com/sirjojo69/ioBroker.awattar/master/admin/awattar.png",
         "keywords": [
             "PV",
-            "aWATTAR",
-            "ioBroker"
+            "aWATTAR"
         ],
         "type": "utility",
         "news": {
             "1.0.0": {
-				"en": "initial release",
-				"de": "Erstveröffentlichung",
-				"ru": "изначальный выпуск",
-				"pt": "lançamento inicial",
-				"nl": "Eerste uitgave",
-				"fr": "Première version",
-				"it": "Versione iniziale",
-				"es": "Versión inicial",
-				"pl": "Pierwsze wydanie",
-				"zh-cn": "初始发行"
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "изначальный выпуск",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "uk": "початковий випуск",
+                "zh-cn": "初始发行"
             },
             "1.0.2": {
 				"en": "deleted admin tab",
 				"de": "Admin-Tab gelöscht",
 				"ru": "удаленная вкладка администратора",
 				"pt": "aba admin excluída",
-				"nl": "verwijderd admin-tabblad",
+                "nl": "verwijderd admin-tabblad",
 				"fr": "onglet administrateur supprimé",
-				"it": "scheda amministratore cancellata",
+                "it": "scheda amministratore cancellata",
+                "uk": "видалено вкладку адміністратора",
 				"es": "pestaña de administrador eliminada",
 				"pl": "usunięta karta administratora",
 				"zh-cn": "删除了管理标签"
             },
             "1.0.3": {
 				"en": "customized some settings",
-				"de": "einige Einstellungen angepasst",
-				"ru": "изменил некоторые настройки",
-				"pt": "personalizou algumas configurações",
-				"nl": "enkele instellingen aangepast",
-				"fr": "personnalisé certains paramètres",
-				"it": "personalizzato alcune impostazioni",
-				"es": "personalizar algunas configuraciones",
-				"pl": "dostosować niektóre ustawienia",
-				"zh-cn": "自定义一些设置"
+                "de": "einige Einstellungen angepasst",
+                "ru": "изменил некоторые настройки",
+                "pt": "personalizou algumas configurações",
+                "nl": "enkele instellingen aangepast",
+                "fr": "personnalisé certains paramètres",
+                "it": "personalizzato alcune impostazioni",
+                "es": "personalizar algunas configuraciones",
+                "pl": "dostosować niektóre ustawienia",
+                "uk": "налаштував деякі параметри",
+                "zh-cn": "自定义一些设置"
             },
           "1.0.5": {
             "en": "added total price and price incl. vat, API call incl. Parameter start and end",
@@ -72,10 +100,12 @@
             "it": "aggiunto prezzo totale e prezzo incl. iva, chiamata API incl. Inizio e fine del parametro",
             "es": "precio total añadido y precio incl. iva, llamada API incl. Inicio y fin de parámetros",
             "pl": "dodana cena całkowita i cena włącznie. vat, wywołanie API Początek i koniec parametru",
+            "uk": "додано загальну ціну та ціну з урахуванням ПДВ, виклик API включає параметри початку та кінця",
             "zh-cn": "添加总价和价格包括。增值税，API 调用包括。参数开始和结束"
           },
           "1.1.0": {
             "en": "Updates to testing, copyright, dependencies, some minor fixes",
+            "uk": "Оновлення тестування, авторських прав, залежностей, деякі незначні виправлення",
             "de": "Updates zu Tests, Urheberrechten, Abhängigkeiten, einige kleinere Korrekturen",
             "ru": "Обновления тестирования, авторских прав, зависимостей, некоторые незначительные исправления",
             "pt": "Atualizações para testes, direitos autorais, dependências, algumas correções menores",
@@ -86,7 +116,6 @@
             "pl": "Aktualizacje testowania, praw autorskich, zależności, kilka drobnych poprawek",
             "zh-cn": "测试、版权、依赖项更新，一些小修复"
           }
-
         },
         "titleLang": {
             "en": "aWATTar",
@@ -115,7 +144,7 @@
         "aWATTarApiUrl": "https://api.awattar.de/v1/marketdata",
         "LoadingThresholdStart": "23:00",
         "LoadingThresholdEnd": "06:00",
-        "MWstRate" : "16",
+        "MWstRate" : "19",
         "WorkRate" : "20,08"
     },
     "objects": [],
