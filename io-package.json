@@ -2,7 +2,7 @@
     "common": {
         "name": "awattar",
         "version": "1.1.0",
-        "tier": "3",
+        "tier": 3,
         "desc": {
             "en": "reads out hourly prices from aWATTar",
             "de": "liest Stundenpreise von der aWATTar Website",
@@ -19,6 +19,11 @@
         "authors": [
             "SirJojo69 <gtj.howe@gmx.de>"
         ],
+        "licenseInformation": {
+            "type": "free",
+            "url": "https://opensource.org/licenses/MIT",
+            "license": "MIT"
+        },
         "platform": "Javascript/Node.js",
         "supportLanguages": [
             "en",
@@ -33,14 +38,9 @@
             "uk",
             "zh-cn"
         ],
-        "licenseInformation": {
-            "type": "free",
-            "url": "https://opensource.org/licenses/MIT"
-        },
         "mode": "schedule",
         "schedule": "0 15 * * *",
         "enabled": true,
-        "license": "MIT",
         "loglevel": "info",
         "readme": "https://github.com/sirjojo69/ioBroker.awattar/blob/master/README.md",
         "icon": "awattar.png",
@@ -64,32 +64,6 @@
                 "uk": "початковий випуск",
                 "zh-cn": "初始发行"
             },
-            "1.0.2": {
-				"en": "deleted admin tab",
-				"de": "Admin-Tab gelöscht",
-				"ru": "удаленная вкладка администратора",
-				"pt": "aba admin excluída",
-                "nl": "verwijderd admin-tabblad",
-				"fr": "onglet administrateur supprimé",
-                "it": "scheda amministratore cancellata",
-                "uk": "видалено вкладку адміністратора",
-				"es": "pestaña de administrador eliminada",
-				"pl": "usunięta karta administratora",
-				"zh-cn": "删除了管理标签"
-            },
-            "1.0.3": {
-				"en": "customized some settings",
-                "de": "einige Einstellungen angepasst",
-                "ru": "изменил некоторые настройки",
-                "pt": "personalizou algumas configurações",
-                "nl": "enkele instellingen aangepast",
-                "fr": "personnalisé certains paramètres",
-                "it": "personalizzato alcune impostazioni",
-                "es": "personalizar algunas configuraciones",
-                "pl": "dostosować niektóre ustawienia",
-                "uk": "налаштував деякі параметри",
-                "zh-cn": "自定义一些设置"
-            },
           "1.0.5": {
             "en": "added total price and price incl. vat, API call incl. Parameter start and end",
             "de": "zuzüglich Gesamtpreis und Preis inkl. MwSt., API-Aufruf inkl. Parameter Start und Ende",
@@ -102,6 +76,19 @@
             "pl": "dodana cena całkowita i cena włącznie. vat, wywołanie API Początek i koniec parametru",
             "uk": "додано загальну ціну та ціну з урахуванням ПДВ, виклик API включає параметри початку та кінця",
             "zh-cn": "添加总价和价格包括。增值税，API 调用包括。参数开始和结束"
+          },
+          "1.0.6": {
+            "en": "new version for official repo",
+            "de": "neue Version für offizielles Repo",
+            "ru": "новая версия для официального репозитория",
+            "pt": "nova versão para repositório oficial",
+            "nl": "nieuwe versie voor officieel repo",
+            "fr": "nouvelle version pour le dépôt officiel",
+            "it": "nuova versione per il repository ufficiale",
+            "es": "nueva versión para el repositorio oficial",
+            "pl": "nowa wersja dla oficjalnego repozytorium",
+            "uk": "нова версія для офіційного репозиторію",
+            "zh-cn": "官方仓库的新版本"
           },
           "1.1.0": {
             "en": "Updates to testing, copyright, dependencies, some minor fixes",
