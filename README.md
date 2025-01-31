@@ -49,8 +49,7 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 2.0.0 (2025-01-31)
 * (SirJojo69) new price calculation
 
 ### 1.1.0
