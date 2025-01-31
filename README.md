@@ -50,7 +50,7 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 
 ## Changelog
 
-## **WORK IN PROGRESS**
+### **WORK IN PROGRESS**
 
 ### 1.1.0
 * (Apollon77) Updates to testing from ioBroker Core team to make testing compatible with js-controller 4.0
