@@ -55,6 +55,7 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 * (SirJojo69) changed copyright
 * (SirJojo69) updated js-controller dependency to 5.0.19
 * (SirJojo69) fixed stat and end date format to DD.MM.YYYY
+* (SirJojo69) adapter runs once at start
 * (mcm1957) Updates to testing
 
 ### 1.0.6
