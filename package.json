@@ -1,9 +1,9 @@
 {
   "name": "iobroker.awattar",
-  "version": "2.0.0",
+  "version": "1.1.0",
   "description": "reads out hourly prices from aWATTar Website",
   "author": {
-    "name": "SirJojo69",
+    "name": "sirjojo69",
     "email": "gtj.howe@gmx.de"
   },
   "homepage": "https://github.com/sirjojo69/ioBroker.awattar",

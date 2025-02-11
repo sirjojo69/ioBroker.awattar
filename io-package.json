@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "2.0.0",
+        "version": "1.1.0",
         "tier": 3,
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -17,7 +17,7 @@
             "zh-cn": "读取 aWATTar 的每小时价格"
         },
         "authors": [
-            "SirJojo69 <gtj.howe@gmx.de>"
+            "sirjojo69 <gtj.howe@gmx.de>"
         ],
         "licenseInformation": {
             "type": "free",
