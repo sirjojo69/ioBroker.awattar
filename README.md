@@ -47,12 +47,10 @@ Im Ausgangszustand ist der Adapter so eingestellt dass er um 15.00 Uhr die Werte
 Dieser Schedule kann natürlich angepasst werden.
 Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api Doku</a> stehen diese Werte jeden Tag um 14.00 Uhr bereit.
 
-
-
 ## Changelog
 <!--
-  Placeholder for the next version (at the beginning of the line):
-  ### **WORK IN PROGRESS**
+    Placeholder for the next version (at the beginning of the line):
+    ### **WORK IN PROGRESS**
 -->
 
 ### 1.1.0
