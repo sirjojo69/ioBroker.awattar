@@ -53,7 +53,6 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 <!--
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
-  * (SirJojo69) new price calculation
 -->
 
 ### 1.1.0
