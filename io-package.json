@@ -116,7 +116,6 @@
             "pl": "aWATtar",
             "zh-cn": "阿瓦塔"
         },
-        "main": "main.js",
         "compact": true,
         "connectionType": "cloud",
         "dataSource": "poll",
