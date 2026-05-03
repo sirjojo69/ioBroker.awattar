@@ -79,6 +79,8 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
 ### 0.0.1
 * (SirJojo69) initial release.
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 Copyright (c) 2025 SirJojo69 <gtj.howe@gmx.de>
