@@ -53,6 +53,10 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
     ### **WORK IN PROGRESS**
 -->
 
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 1.1.0
 * (Apollon77) Updates to testing from ioBroker Core team to make testing compatible with js-controller 4.0
 * (SirJojo69) changed copyright
