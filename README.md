@@ -53,6 +53,9 @@ Laut <a href="https://www.awattar.de/services/api" target="_blank">aWATTar api D
     ### **WORK IN PROGRESS**
 -->
 
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22 now
+
 ### 1.1.0
 * (Apollon77) Updates to testing from ioBroker Core team to make testing compatible with js-controller 4.0
 * (SirJojo69) changed copyright
