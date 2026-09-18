@@ -16,3 +16,6 @@ admin/i18n/*/flat.txt
 
 # ioBroker dev-server
 .dev-server/
+
+# release-script commit info
+.commitinfo

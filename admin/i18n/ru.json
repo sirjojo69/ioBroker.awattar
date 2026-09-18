@@ -1,0 +1,8 @@
+{
+    "awattar adapter settings": "Настройки адаптера для awattar",
+    "URL for aWATTar API": "URL для API aWATTar",
+    "Start Threshold Loading (e.g. for EV)": "Начало периода зарядки (напр. для электромобиля)",
+    "End Threshold Loading (e.g. for EV)": "Конец периода зарядки",
+    "actual VAT rate (percent)": "актуальная ставка НДС (в процентах)",
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Тариф за электроэнергию (\"использование сети\" + \"сборы, пошлины, налоги\" + \"стоимость сертификатов зелёной энергии, биллинга и сбыта\", вкл. НДС)"
+}

@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.1.0",
+        "version": "1.2.0",
         "tier": 3,
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -21,23 +21,9 @@
         ],
         "licenseInformation": {
             "type": "free",
-            "url": "https://opensource.org/licenses/MIT",
             "license": "MIT"
         },
         "platform": "Javascript/Node.js",
-        "supportLanguages": [
-            "en",
-            "de",
-            "ru",
-            "pt",
-            "nl",
-            "fr",
-            "it",
-            "es",
-            "pl",
-            "uk",
-            "zh-cn"
-        ],
         "mode": "schedule",
         "schedule": "0 15 * * *",
         "enabled": true,
@@ -90,18 +76,18 @@
             "uk": "нова версія для офіційного репозиторію",
             "zh-cn": "官方仓库的新版本"
           },
-          "1.1.0": {
-            "en": "Updates to testing, copyright, dependencies, some minor fixes",
-            "uk": "Оновлення тестування, авторських прав, залежностей, деякі незначні виправлення",
-            "de": "Updates zu Tests, Urheberrechten, Abhängigkeiten, einige kleinere Korrekturen",
-            "ru": "Обновления тестирования, авторских прав, зависимостей, некоторые незначительные исправления",
-            "pt": "Atualizações para testes, direitos autorais, dependências, algumas correções menores",
-            "nl": "Updates voor testen, auteursrechten, afhankelijkheden, enkele kleine fixes",
-            "fr": "Mises à jour des tests, des droits d'auteur, des dépendances, quelques corrections mineures",
-            "it": "Aggiornamenti ai test, copyright, dipendenze, alcune correzioni minori",
-            "es": "Actualizaciones de pruebas, derechos de autor, dependencias, algunas correcciones menores",
-            "pl": "Aktualizacje testowania, praw autorskich, zależności, kilka drobnych poprawek",
-            "zh-cn": "测试、版权、依赖项更新，一些小修复"
+          "1.2.0": {
+            "en": "Repository maintenance: updated dependencies, Node.js 20+ support, workflow and schema fixes",
+            "de": "Repository-Wartung: Abhängigkeiten aktualisiert, Node.js 20+ Unterstützung, Workflow- und Schema-Korrekturen",
+            "ru": "Обслуживание репозитория: обновлены зависимости, поддержка Node.js 20+, исправления workflow и схемы",
+            "pt": "Manutenção do repositório: dependências atualizadas, suporte a Node.js 20+, correções de workflow e schema",
+            "nl": "Repository-onderhoud: afhankelijkheden bijgewerkt, Node.js 20+ ondersteuning, workflow- en schemacorrecties",
+            "fr": "Maintenance du dépôt : dépendances mises à jour, support Node.js 20+, corrections du workflow et du schéma",
+            "it": "Manutenzione del repository: dipendenze aggiornate, supporto Node.js 20+, correzioni al workflow e allo schema",
+            "es": "Mantenimiento del repositorio: dependencias actualizadas, soporte para Node.js 20+, correcciones de workflow y esquema",
+            "pl": "Konserwacja repozytorium: zaktualizowane zależności, obsługa Node.js 20+, poprawki workflow i schematu",
+            "uk": "Обслуговування репозиторію: оновлено залежності, підтримка Node.js 20+, виправлення workflow і схеми",
+            "zh-cn": "仓库维护：更新依赖项，支持 Node.js 20+，修复工作流和架构问题"
           }
         },
         "titleLang": {
@@ -114,16 +100,23 @@
             "it": "aWATTar",
             "es": "aWATTar",
             "pl": "aWATtar",
+            "uk": "aWATTar",
             "zh-cn": "阿瓦塔"
         },
-        "main": "main.js",
         "compact": true,
         "connectionType": "cloud",
         "dataSource": "poll",
-        "materialize": true,
+        "adminUI": {
+            "config": "materialize"
+        },
         "dependencies": [
             {
-                "js-controller": ">=5.0.19"
+                "js-controller": ">=6.0.11"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=7.6.17"
             }
         ]
     },

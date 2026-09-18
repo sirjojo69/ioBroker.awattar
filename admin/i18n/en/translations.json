@@ -1,5 +1,0 @@
-{
-    "aWATTarApiUrl": "URL for aWATTar API",
-    "LoadingThresholdStart": "Start Threshold Loading (e.g. for EV)",
-    "LoadingThresholdEnd": "End Threshold Loading"
-}

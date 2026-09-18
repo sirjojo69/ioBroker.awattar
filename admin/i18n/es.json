@@ -1,0 +1,8 @@
+{
+    "awattar adapter settings": "Ajustes del adaptador para awattar",
+    "URL for aWATTar API": "URL para la API de aWATTar",
+    "Start Threshold Loading (e.g. for EV)": "Inicio del umbral de carga (p. ej. para VE)",
+    "End Threshold Loading (e.g. for EV)": "Fin del umbral de carga",
+    "actual VAT rate (percent)": "tipo de IVA actual (porcentaje)",
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Precio de la energía (\"uso de la red\" + \"tasas, cargos, impuestos\" + \"coste de certificados de energía verde, facturación y distribución\", IVA incl.)"
+}

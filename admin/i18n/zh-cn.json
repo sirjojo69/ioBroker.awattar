@@ -1,0 +1,8 @@
+{
+    "awattar adapter settings": "awattar的适配器设置",
+    "URL for aWATTar API": "aWATTar API 的 URL",
+    "Start Threshold Loading (e.g. for EV)": "开始充电阈值（例如用于电动车）",
+    "End Threshold Loading (e.g. for EV)": "结束充电阈值",
+    "actual VAT rate (percent)": "当前增值税税率（百分比）",
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "电价（“电网使用费”+“税费、摊派、税款”+“绿色电力证书、结算与配送成本”，含增值税）"
+}

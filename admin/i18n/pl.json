@@ -1,0 +1,8 @@
+{
+    "awattar adapter settings": "Ustawienia adaptera dla awattar",
+    "URL for aWATTar API": "URL API aWATTar",
+    "Start Threshold Loading (e.g. for EV)": "Początek progu ładowania (np. dla EV)",
+    "End Threshold Loading (e.g. for EV)": "Koniec progu ładowania",
+    "actual VAT rate (percent)": "aktualna stawka VAT (procent)",
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Cena energii (\"korzystanie z sieci\" + \"opłaty, daniny, podatki\" + \"koszt certyfikatów zielonej energii, rozliczenia i dystrybucji\", z VAT)"
+}

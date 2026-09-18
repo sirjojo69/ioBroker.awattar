@@ -1,0 +1,8 @@
+{
+    "awattar adapter settings": "Adapterinstellingen voor awattar",
+    "URL for aWATTar API": "URL voor aWATTar API",
+    "Start Threshold Loading (e.g. for EV)": "Start laaddrempel (bijv. voor EV)",
+    "End Threshold Loading (e.g. for EV)": "Einde laaddrempel",
+    "actual VAT rate (percent)": "actueel btw-tarief (percentage)",
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Energietarief (\"netgebruik\" + \"heffingen, kosten, belastingen\" + \"kosten voor groene stroomcertificaten, facturatie en distributie\", incl. btw)"
+}
