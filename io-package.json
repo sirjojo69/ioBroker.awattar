@@ -77,17 +77,17 @@
             "zh-cn": "官方仓库的新版本"
           },
           "1.2.0": {
-            "en": "Repository maintenance: updated dependencies, Node.js 20+ support, workflow and schema fixes",
-            "de": "Repository-Wartung: Abhängigkeiten aktualisiert, Node.js 20+ Unterstützung, Workflow- und Schema-Korrekturen",
-            "ru": "Обслуживание репозитория: обновлены зависимости, поддержка Node.js 20+, исправления workflow и схемы",
-            "pt": "Manutenção do repositório: dependências atualizadas, suporte a Node.js 20+, correções de workflow e schema",
-            "nl": "Repository-onderhoud: afhankelijkheden bijgewerkt, Node.js 20+ ondersteuning, workflow- en schemacorrecties",
-            "fr": "Maintenance du dépôt : dépendances mises à jour, support Node.js 20+, corrections du workflow et du schéma",
-            "it": "Manutenzione del repository: dipendenze aggiornate, supporto Node.js 20+, correzioni al workflow e allo schema",
-            "es": "Mantenimiento del repositorio: dependencias actualizadas, soporte para Node.js 20+, correcciones de workflow y esquema",
-            "pl": "Konserwacja repozytorium: zaktualizowane zależności, obsługa Node.js 20+, poprawki workflow i schematu",
-            "uk": "Обслуговування репозиторію: оновлено залежності, підтримка Node.js 20+, виправлення workflow і схеми",
-            "zh-cn": "仓库维护：更新依赖项，支持 Node.js 20+，修复工作流和架构问题"
+            "en": "Fixed: missing translations in npm package and Admin UI, cleaner shutdown; plus Node.js 20+ support and dependency/workflow updates",
+            "de": "Fehlerbehebung: fehlende Übersetzungen im npm-Paket und der Admin-UI, saubereres Beenden; außerdem Node.js 20+ Unterstützung sowie Abhängigkeits-/Workflow-Updates",
+            "ru": "Исправлено: отсутствующие переводы в пакете npm и в интерфейсе администратора, более корректное завершение работы; также поддержка Node.js 20+ и обновления зависимостей/workflow",
+            "pt": "Correção: traduções ausentes no pacote npm e na interface de administração, encerramento mais limpo; além de suporte a Node.js 20+ e atualizações de dependências/workflow",
+            "nl": "Opgelost: ontbrekende vertalingen in het npm-pakket en de Admin UI, netter afsluiten; daarnaast Node.js 20+ ondersteuning en afhankelijkheids-/workflow-updates",
+            "fr": "Correction : traductions manquantes dans le paquet npm et l'interface d'administration, arrêt plus propre ; ainsi que le support Node.js 20+ et des mises à jour de dépendances/workflow",
+            "it": "Correzione: traduzioni mancanti nel pacchetto npm e nell'interfaccia di amministrazione, arresto più pulito; inoltre supporto Node.js 20+ e aggiornamenti di dipendenze/workflow",
+            "es": "Corrección: traducciones faltantes en el paquete npm y en la interfaz de administración, cierre más limpio; además soporte para Node.js 20+ y actualizaciones de dependencias/workflow",
+            "pl": "Poprawka: brakujące tłumaczenia w pakiecie npm i interfejsie administracyjnym, czystsze zamykanie; ponadto obsługa Node.js 20+ oraz aktualizacje zależności/workflow",
+            "uk": "Виправлено: відсутні переклади в пакеті npm та в інтерфейсі адміністратора, коректніше завершення роботи; також підтримка Node.js 20+ та оновлення залежностей/workflow",
+            "zh-cn": "修复：npm 包和管理界面中缺失的翻译，更干净的关闭流程；此外支持 Node.js 20+ 并更新了依赖项和工作流"
           }
         },
         "titleLang": {

@@ -50,12 +50,17 @@ According to the <a href="https://www.awattar.de/services/api" target="_blank">a
 -->
 
 ### 1.2.0
+* (repository maintenance) Fixed: admin/i18n translations were excluded from the npm package (missing languages in Admin UI for installed users)
+* (repository maintenance) Fixed: Admin UI translations (words.js) never matched the actual field labels; corrected and completed for all supported languages
+* (repository maintenance) Fixed: replaced plain setTimeout() with adapter.setTimeout()/clearTimeout() so the shutdown timer is properly cleaned up
 * (repository maintenance) Updated dependencies (@iobroker/adapter-core, @iobroker/adapter-dev, @iobroker/testing, @alcalzone/release-script)
-* (repository maintenance) Migrated ESLint to @iobroker/eslint-config (flat config)
+* (repository maintenance) Migrated ESLint to @iobroker/eslint-config (flat config) and reformatted the codebase accordingly
 * (repository maintenance) Raised minimum Node.js version to >=20, added Node.js 22/24/26 to the test matrix
-* (repository maintenance) Updated js-controller/admin dependency requirements, fixed io-package.json schema issues
+* (repository maintenance) Updated js-controller/admin dependency requirements, fixed io-package.json schema issues (removed unknown/deprecated properties, invalid news entry)
 * (repository maintenance) Migrated NPM publishing to Trusted Publishing (OIDC)
-* (repository maintenance) Removed obsolete gulpfile/.travis.yml, added Dependabot configuration
+* (repository maintenance) Migrated admin/i18n to short format ({lang}.json)
+* (repository maintenance) Removed obsolete gulpfile.js and .travis.yml, added Dependabot configuration and auto-merge workflow
+* (repository maintenance) Translated README.md to English, fixed LICENSE copyright year
 
 ### 1.1.0
 * (Apollon77) Updates to testing from ioBroker Core team to make testing compatible with js-controller 4.0
