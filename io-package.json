@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "tier": 3,
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -88,6 +88,19 @@
             "pl": "Poprawka: brakujące tłumaczenia w pakiecie npm i interfejsie administracyjnym, czystsze zamykanie; ponadto obsługa Node.js 20+ oraz aktualizacje zależności/workflow",
             "uk": "Виправлено: відсутні переклади в пакеті npm та в інтерфейсі адміністратора, коректніше завершення роботи; також підтримка Node.js 20+ та оновлення залежностей/workflow",
             "zh-cn": "修复：npm 包和管理界面中缺失的翻译，更干净的关闭流程；此外支持 Node.js 20+ 并更新了依赖项和工作流"
+          },
+          "1.3.0": {
+            "en": "Dropped Node.js 20 support (reached end of life); Node.js 22 is now the minimum required version",
+            "de": "Node.js 20 Unterstützung entfernt (End of Life erreicht); Node.js 22 ist jetzt die Mindestanforderung",
+            "ru": "Прекращена поддержка Node.js 20 (достиг конца жизненного цикла); теперь требуется минимум Node.js 22",
+            "pt": "Suporte ao Node.js 20 removido (fim de vida); Node.js 22 é agora a versão mínima exigida",
+            "nl": "Ondersteuning voor Node.js 20 verwijderd (einde levensduur bereikt); Node.js 22 is nu de minimaal vereiste versie",
+            "fr": "Suppression du support de Node.js 20 (fin de vie atteinte) ; Node.js 22 est désormais la version minimale requise",
+            "it": "Rimosso il supporto per Node.js 20 (fine vita raggiunta); Node.js 22 è ora la versione minima richiesta",
+            "es": "Se eliminó el soporte para Node.js 20 (fin de vida); Node.js 22 es ahora la versión mínima requerida",
+            "pl": "Usunięto obsługę Node.js 20 (koniec wsparcia); Node.js 22 jest teraz minimalną wymaganą wersją",
+            "uk": "Видалено підтримку Node.js 20 (закінчився життєвий цикл); Node.js 22 тепер є мінімально необхідною версією",
+            "zh-cn": "已移除对 Node.js 20 的支持（已终止维护）；现在最低需要 Node.js 22"
           }
         },
         "titleLang": {

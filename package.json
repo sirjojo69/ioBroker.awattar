@@ -1,6 +1,6 @@
 {
   "name": "iobroker.awattar",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "reads out hourly prices from aWATTar Website",
   "author": {
     "name": "sirjojo69",
@@ -18,7 +18,7 @@
     "url": "https://github.com/sirjojo69/ioBroker.awattar"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "files": [
     "admin/",
