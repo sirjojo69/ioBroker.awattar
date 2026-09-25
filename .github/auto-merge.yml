@@ -1,0 +1,12 @@
+# Configuration for iobroker-bot-orga/action-automerge-dependabot
+# See: https://github.com/iobroker-bot-orga/action-automerge-dependabot
+
+# Merge patch updates for production dependencies
+- match:
+    dependency_type: production
+    update_type: "semver:patch"
+
+# Merge patch and minor updates for development dependencies
+- match:
+    dependency_type: development
+    update_type: "semver:minor"
