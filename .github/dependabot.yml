@@ -5,16 +5,13 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    cooldown:
+      default: 7
     ignore:
-      # these went ESM-only starting with the versions below; our test setup
-      # is CommonJS (require), matching the adapter runtime itself. Revisit
-      # if/when the test suite is migrated to ESM.
-      - dependency-name: "chai"
-        versions: [">=5.0.0"]
-      - dependency-name: "chai-as-promised"
-        versions: [">=8.0.0"]
-      - dependency-name: "sinon-chai"
-        versions: [">=4.0.0"]
+      # @types/node major version should track the adapter's minimum
+      # supported Node.js major (currently 22) to avoid incorrect typings.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

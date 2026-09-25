@@ -2,8 +2,8 @@
     "eslint.enable": true,
     "json.schemas": [
         {
-            "fileMatch": ["/io-package.json"],
-            "url": "https://json.schemastore.org/io-package"
+            "fileMatch": ["io-package.json"],
+            "url": "https://raw.githubusercontent.com/ioBroker/ioBroker.js-controller/master/schemas/io-package.json"
         }
     ]
 }
