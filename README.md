@@ -49,6 +49,9 @@ According to the <a href="https://www.awattar.de/services/api" target="_blank">a
     ### **WORK IN PROGRESS**
 -->
 
+### **WORK IN PROGRESS**
+* Migrated the Admin UI from the legacy Materialize HTML page to jsonConfig (same fields, existing settings are kept unchanged)
+
 ### 1.3.0
 * Dropped Node.js 20 support (reached end of life on 2026-04-30); Node.js 22 is now the minimum required version
 * (repository maintenance) Pinned chai/chai-as-promised/sinon-chai below their new ESM-only major versions in Dependabot config, since the test suite is CommonJS

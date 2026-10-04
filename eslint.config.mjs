@@ -8,13 +8,6 @@ export default [
         },
     },
     {
-        ignores: [
-            'admin/build/',
-            'admin/words.js',
-            'admin/admin.d.ts',
-            '.dev-server/',
-            '*.test.js',
-            'lib/adapter-config.d.ts',
-        ],
+        ignores: ['admin/build/', '.dev-server/', '*.test.js', 'lib/adapter-config.d.ts'],
     },
 ];
