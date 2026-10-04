@@ -24,7 +24,7 @@ class Awattar extends utils.Adapter {
         const url = this.config.aWATTarApiUrl;
         const mwst = parseInt(this.config.MWstRate);
         const mwstRate = (mwst + 100) / 100;
-        const workRate = parseFloat(this.config.WorkRate);
+        const workRate = parseFloat(String(this.config.WorkRate).replace(',', '.'));
         const loadingThresholdStart = this.config.LoadingThresholdStart;
         if (isNaN(parseInt(loadingThresholdStart))) {
             return this.log.error('loadingThresholdStart NaN');
