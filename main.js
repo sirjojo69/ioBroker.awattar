@@ -267,7 +267,7 @@ class Awattar extends utils.Adapter {
             const endTs = sortedArray[k].end_timestamp;
             const end = new Date(endTs);
 
-            if (start >= loadingThresholdStartDateTime && end < loadingThresholdEndDateTime) {
+            if (start >= loadingThresholdStartDateTime && end <= loadingThresholdEndDateTime) {
                 const stateBaseName = `pricesOrdered.${j}.`;
 
                 //ensure all necessary data points exist

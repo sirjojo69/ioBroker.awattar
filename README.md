@@ -49,6 +49,9 @@ According to the <a href="https://www.awattar.de/services/api" target="_blank">a
     ### **WORK IN PROGRESS**
 -->
 
+### **WORK IN PROGRESS**
+* Fixed: the last hour of the configured period was missing in `pricesOrdered` (the hour ending exactly at the configured end time was left out, e.g. 05:00-06:00 for an end time of 06:00); it is now included. Periods now contain one more hour than before
+
 ### 1.4.0
 * Migrated the Admin UI from the legacy Materialize HTML page to jsonConfig (same fields, existing settings are kept unchanged)
 * Fixed: a decimal comma in the work rate (e.g. `20,08`) was cut off at the comma, so only the integer part (`20`) was added to the total price; both `20,08` and `20.08` are now handled
