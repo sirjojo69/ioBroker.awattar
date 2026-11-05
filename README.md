@@ -50,9 +50,10 @@ According to the <a href="https://www.awattar.de/services/api" target="_blank">a
     ### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### 1.5.0
 * New: the folder `pricesOrderedTomorrow` contains all hours of tomorrow sorted by price (independent of the configured period, 23-25 entries depending on daylight saving time); outdated entries are removed on every run
 * Fixed: the last hour of the configured period was missing in `pricesOrdered` (the hour ending exactly at the configured end time was left out, e.g. 05:00-06:00 for an end time of 06:00); it is now included. Periods now contain one more hour than before
+* (repository maintenance) Pinned `@types/node` to 22.x
 
 ### 1.4.0
 * Migrated the Admin UI from the legacy Materialize HTML page to jsonConfig (same fields, existing settings are kept unchanged)

@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.4.0",
+        "version": "1.5.0",
         "tier": 3,
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -114,6 +114,19 @@
             "pl": "Interfejs administratora przeniesiony na jsonConfig; naprawiono: cena energii z przecinkiem dziesiętnym była obcinana (np. 20,08 jest teraz liczone jako 20,08 zamiast 20) - ceny całkowite mogą nieznacznie wzrosnąć",
             "uk": "Інтерфейс адміністратора переведено на jsonConfig; виправлено: робоча ціна з десятковою комою обрізалася (наприклад, 20,08 тепер враховується як 20,08, а не 20) — загальні ціни можуть трохи зрости",
             "zh-cn": "管理界面已迁移到 jsonConfig；修复：带小数逗号的电价被截断的问题（例如 20,08 现在按 20,08 计算，而不是 20）- 总价可能会略有上升"
+          },
+          "1.5.0": {
+            "en": "New folder pricesOrderedTomorrow with all hours of tomorrow sorted by price; fixed: the last hour of the configured period was missing in pricesOrdered (e.g. 05:00-06:00 for an end time of 06:00) - the period now contains one more hour than before",
+            "de": "Neuer Ordner pricesOrderedTomorrow mit allen Stunden von morgen nach Preis sortiert; behoben: Die letzte Stunde des eingestellten Zeitraums fehlte in pricesOrdered (z.B. 05:00-06:00 bei Ende 06:00) - der Zeitraum enthält jetzt eine Stunde mehr als bisher",
+            "ru": "Новая папка pricesOrderedTomorrow со всеми часами завтрашнего дня, отсортированными по цене; исправлено: последний час заданного периода отсутствовал в pricesOrdered (например, 05:00-06:00 при конце 06:00) — теперь период содержит на один час больше",
+            "pt": "Nova pasta pricesOrderedTomorrow com todas as horas de amanhã ordenadas por preço; corrigido: a última hora do período configurado faltava em pricesOrdered (por exemplo, 05:00-06:00 com fim às 06:00) - o período agora contém mais uma hora do que antes",
+            "nl": "Nieuwe map pricesOrderedTomorrow met alle uren van morgen gesorteerd op prijs; opgelost: het laatste uur van de ingestelde periode ontbrak in pricesOrdered (bijv. 05:00-06:00 bij een einde van 06:00) - de periode bevat nu één uur meer dan voorheen",
+            "fr": "Nouveau dossier pricesOrderedTomorrow avec toutes les heures de demain triées par prix ; correction : la dernière heure de la période configurée manquait dans pricesOrdered (par ex. 05:00-06:00 pour une fin à 06:00) - la période contient désormais une heure de plus qu'avant",
+            "it": "Nuova cartella pricesOrderedTomorrow con tutte le ore di domani ordinate per prezzo; corretto: l'ultima ora del periodo configurato mancava in pricesOrdered (ad es. 05:00-06:00 con fine alle 06:00) - il periodo ora contiene un'ora in più rispetto a prima",
+            "es": "Nueva carpeta pricesOrderedTomorrow con todas las horas de mañana ordenadas por precio; corregido: la última hora del período configurado faltaba en pricesOrdered (p. ej., 05:00-06:00 con fin a las 06:00) - el período ahora contiene una hora más que antes",
+            "pl": "Nowy folder pricesOrderedTomorrow ze wszystkimi godzinami jutra posortowanymi według ceny; naprawiono: ostatniej godziny skonfigurowanego okresu brakowało w pricesOrdered (np. 05:00-06:00 przy końcu o 06:00) - okres zawiera teraz o jedną godzinę więcej niż dotychczas",
+            "uk": "Нова папка pricesOrderedTomorrow з усіма годинами завтрашнього дня, відсортованими за ціною; виправлено: останньої години заданого періоду не вистачало в pricesOrdered (наприклад, 05:00-06:00 при кінці о 06:00) — тепер період містить на одну годину більше",
+            "zh-cn": "新增文件夹 pricesOrderedTomorrow，包含明天所有小时并按价格排序；修复：pricesOrdered 中缺少所设时间段的最后一小时（例如结束时间为 06:00 时缺少 05:00-06:00）- 该时间段现在比以前多一小时"
           }
         },
         "titleLang": {
