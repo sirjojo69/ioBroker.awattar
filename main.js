@@ -2,6 +2,37 @@
 const utils = require('@iobroker/adapter-core');
 const axios = require('axios').default;
 
+// data points of one price slot below "pricesOrdered.<n>" / "pricesOrderedTomorrow.<n>"
+const SLOT_STATES = [
+    {
+        id: 'start',
+        name: 'Gultigkeitsbeginn (Uhrzeit)',
+        type: 'string',
+        desc: 'Uhrzeit des Beginns der Gültigkeit des Preises',
+    },
+    {
+        id: 'startTimestamp',
+        name: 'startTimestamp',
+        type: 'number',
+        desc: 'Timestamp des Beginns der Gültigkeit des Preises',
+    },
+    {
+        id: 'startDate',
+        name: 'Gultigkeitsbeginn (Datum)',
+        type: 'string',
+        desc: 'Datum des Beginns der Gültigkeit des Preises',
+    },
+    { id: 'end', name: 'Gultigkeitsende (Uhrzeit)', type: 'string' },
+    {
+        id: 'endTimestamp',
+        name: 'endTimestamp',
+        type: 'number',
+        desc: 'Timestamp des Endes der Gültigkeit des Preises',
+    },
+    { id: 'endDate', name: 'Gultigkeitsende (Datum)', type: 'string' },
+    { id: 'priceKwh', name: 'Preis pro KWh (excl. MwSt.)', type: 'number', unit: 'Cent / KWh' },
+];
+
 class Awattar extends utils.Adapter {
     constructor(options) {
         super({ ...options, name: 'awattar' });
@@ -257,137 +288,100 @@ class Awattar extends utils.Adapter {
 
         this.log.debug('all prices written to their data points');
 
-        //ordered prices
+        //ordered prices (period configured in the settings)
         const sortedArray = array.sort(compareValues('marketprice', 'asc'));
-        let j = 0;
-
-        for (let k = 0; k < sortedArray.length; k++) {
-            const startTs = sortedArray[k].start_timestamp;
-            const start = new Date(startTs);
-            const endTs = sortedArray[k].end_timestamp;
-            const end = new Date(endTs);
-
-            if (start >= loadingThresholdStartDateTime && end <= loadingThresholdEndDateTime) {
-                const stateBaseName = `pricesOrdered.${j}.`;
-
-                //ensure all necessary data points exist
-                await this.setObjectNotExistsAsync(`${stateBaseName}start`, {
-                    type: 'state',
-                    common: {
-                        name: 'Gultigkeitsbeginn (Uhrzeit)',
-                        type: 'string',
-                        role: 'value',
-                        desc: 'Uhrzeit des Beginns der Gültigkeit des Preises',
-                        read: true,
-                        write: false,
-                    },
-                    native: {},
-                });
-
-                await this.setObjectNotExistsAsync(`${stateBaseName}startTimestamp`, {
-                    type: 'state',
-                    common: {
-                        name: 'startTimestamp',
-                        type: 'number',
-                        role: 'value',
-                        desc: 'Timestamp des Beginns der Gültigkeit des Preises',
-                        read: true,
-                        write: false,
-                    },
-                    native: {},
-                });
-
-                await this.setObjectNotExistsAsync(`${stateBaseName}startDate`, {
-                    type: 'state',
-                    common: {
-                        name: 'Gultigkeitsbeginn (Datum)',
-                        type: 'string',
-                        role: 'value',
-                        desc: 'Datum des Beginns der Gültigkeit des Preises',
-                        read: true,
-                        write: false,
-                    },
-                    native: {},
-                });
-
-                await this.setObjectNotExistsAsync(`${stateBaseName}end`, {
-                    type: 'state',
-                    common: {
-                        name: 'Gultigkeitsende (Uhrzeit)',
-                        type: 'string',
-                        role: 'value',
-                        read: true,
-                        write: false,
-                    },
-                    native: {},
-                });
-
-                await this.setObjectNotExistsAsync(`${stateBaseName}endTimestamp`, {
-                    type: 'state',
-                    common: {
-                        name: 'endTimestamp',
-                        type: 'number',
-                        role: 'value',
-                        desc: 'Timestamp des Endes der Gültigkeit des Preises',
-                        read: true,
-                        write: false,
-                    },
-                    native: {},
-                });
-
-                await this.setObjectNotExistsAsync(`${stateBaseName}endDate`, {
-                    type: 'state',
-                    common: {
-                        name: 'Gultigkeitsende (Datum)',
-                        type: 'string',
-                        role: 'value',
-                        read: true,
-                        write: false,
-                    },
-                    native: {},
-                });
-
-                await this.setObjectNotExistsAsync(`${stateBaseName}priceKwh`, {
-                    type: 'state',
-                    common: {
-                        name: 'Preis pro KWh (excl. MwSt.)',
-                        type: 'number',
-                        role: 'value',
-                        unit: 'Cent / KWh',
-                        read: true,
-                        write: false,
-                    },
-                    native: {},
-                });
-
-                //calculate prices / timestamps
-                const startTime = start.toLocaleTimeString('de-DE');
-                const startDate = start.toLocaleDateString('de-DE');
-                const endTime = end.toLocaleTimeString('de-DE');
-                const endDate = end.toLocaleDateString('de-DE');
-                const priceKwh = sortedArray[k].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
-
-                //write prices / timestamps to their data points
-                await Promise.all([
-                    this.setState(`${stateBaseName}start`, startTime, true),
-                    this.setState(`${stateBaseName}startTimestamp`, startTs, true),
-                    this.setState(`${stateBaseName}startDate`, startDate, true),
-                    this.setState(`${stateBaseName}end`, endTime, true),
-                    this.setState(`${stateBaseName}endTimestamp`, endTs, true),
-                    this.setState(`${stateBaseName}endDate`, endDate, true),
-                    this.setState(`${stateBaseName}priceKwh`, priceKwh, true),
-                ]);
-                j++;
-            }
-        }
-
+        const orderedSlots = sortedArray.filter(
+            slot =>
+                new Date(slot.start_timestamp) >= loadingThresholdStartDateTime &&
+                new Date(slot.end_timestamp) <= loadingThresholdEndDateTime,
+        );
+        await this.writePriceSlots('pricesOrdered', orderedSlots);
         this.log.debug('all ordered prices written to their data points');
+
+        //ordered prices for the whole of tomorrow (independent of the configured period)
+        const tomorrowStart = new Date(heute.getFullYear(), heute.getMonth(), heute.getDate() + 1);
+        const dayAfterTomorrowStart = new Date(heute.getFullYear(), heute.getMonth(), heute.getDate() + 2);
+        const tomorrowSlots = sortedArray.filter(
+            slot =>
+                new Date(slot.start_timestamp) >= tomorrowStart &&
+                new Date(slot.end_timestamp) <= dayAfterTomorrowStart,
+        );
+        await this.writePriceSlots('pricesOrderedTomorrow', tomorrowSlots);
+        await this.removeStaleSlots('pricesOrderedTomorrow', tomorrowSlots.length);
+        this.log.debug(`ordered prices for tomorrow written to their data points (${tomorrowSlots.length} hours)`);
 
         this.stopTimeout = this.setTimeout(() => {
             if (typeof this.stop === 'function') {
                 this.stop();
             }
         }, 10000);
+    }
+
+    /**
+     * Writes price slots to numbered data points below a folder, in the given order.
+     *
+     * @param {string} folder name of the folder, e.g. "pricesOrdered"
+     * @param {Array<{start_timestamp: number, end_timestamp: number, marketprice: number}>} slots price slots to write
+     * @returns {Promise<void>} resolves when all data points are written
+     */
+    async writePriceSlots(folder, slots) {
+        for (let j = 0; j < slots.length; j++) {
+            const stateBaseName = `${folder}.${j}.`;
+
+            //ensure all necessary data points exist
+            for (const def of SLOT_STATES) {
+                await this.setObjectNotExistsAsync(`${stateBaseName}${def.id}`, {
+                    type: 'state',
+                    common: {
+                        name: def.name,
+                        type: def.type,
+                        role: 'value',
+                        ...(def.desc ? { desc: def.desc } : {}),
+                        ...(def.unit ? { unit: def.unit } : {}),
+                        read: true,
+                        write: false,
+                    },
+                    native: {},
+                });
+            }
+
+            //calculate prices / timestamps
+            const startTs = slots[j].start_timestamp;
+            const start = new Date(startTs);
+            const endTs = slots[j].end_timestamp;
+            const end = new Date(endTs);
+            const priceKwh = slots[j].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
+
+            //write prices / timestamps to their data points
+            await Promise.all([
+                this.setState(`${stateBaseName}start`, start.toLocaleTimeString('de-DE'), true),
+                this.setState(`${stateBaseName}startTimestamp`, startTs, true),
+                this.setState(`${stateBaseName}startDate`, start.toLocaleDateString('de-DE'), true),
+                this.setState(`${stateBaseName}end`, end.toLocaleTimeString('de-DE'), true),
+                this.setState(`${stateBaseName}endTimestamp`, endTs, true),
+                this.setState(`${stateBaseName}endDate`, end.toLocaleDateString('de-DE'), true),
+                this.setState(`${stateBaseName}priceKwh`, priceKwh, true),
+            ]);
+        }
+    }
+
+    /**
+     * Removes numbered data points of a previous run that are no longer valid,
+     * so that old prices are never mistaken for current ones.
+     *
+     * @param {string} folder name of the folder, e.g. "pricesOrderedTomorrow"
+     * @param {number} keep number of entries (0..keep-1) that stay
+     * @returns {Promise<void>} resolves when the old entries are removed
+     */
+    async removeStaleSlots(folder, keep) {
+        // a day has 23 to 25 hourly slots
+        for (let j = keep; j < 25; j++) {
+            try {
+                await this.delObjectAsync(`${folder}.${j}`, { recursive: true });
+            } catch {
+                // nothing to remove
+            }
+        }
     }
 
     onUnload(callback) {
