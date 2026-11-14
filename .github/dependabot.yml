@@ -11,7 +11,6 @@ updates:
       # @types/node major version should track the adapter's minimum
       # supported Node.js major (currently 22) to avoid incorrect typings.
       - dependency-name: "@types/node"
-        update-types: ["version-update:semver-major"]
         versions: [">=23.0.0"]
   - package-ecosystem: "github-actions"
     directory: "/"
