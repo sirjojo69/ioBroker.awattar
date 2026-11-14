@@ -4,5 +4,7 @@
     "Start Threshold Loading (e.g. for EV)": "Начало периода зарядки (напр. для электромобиля)",
     "End Threshold Loading (e.g. for EV)": "Конец периода зарядки",
     "actual VAT rate (percent)": "актуальная ставка НДС (в процентах)",
-    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Тариф за электроэнергию (\"использование сети\" + \"сборы, пошлины, налоги\" + \"стоимость сертификатов зелёной энергии, биллинга и сбыта\", вкл. НДС)"
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Тариф за электроэнергию (\"использование сети\" + \"сборы, пошлины, налоги\" + \"стоимость сертификатов зелёной энергии, биллинга и сбыта\", вкл. НДС)",
+    "Surcharge on the absolute market price (percent, e.g. 3 for aWATTar; 0 = none)": "Надбавка к абсолютной рыночной цене (в процентах, напр. 3 для aWATTar; 0 = нет)",
+    "Fixed surcharge per kWh (cent, before VAT; 0 = none)": "Фиксированная надбавка за кВт·ч (центы, до НДС; 0 = нет)"
 }

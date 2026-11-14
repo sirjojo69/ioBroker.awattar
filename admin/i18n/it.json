@@ -4,5 +4,7 @@
     "Start Threshold Loading (e.g. for EV)": "Inizio soglia di carica (es. per veicolo elettrico)",
     "End Threshold Loading (e.g. for EV)": "Fine soglia di carica",
     "actual VAT rate (percent)": "aliquota IVA attuale (percentuale)",
-    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Prezzo dell'energia (\"uso della rete\" + \"oneri, tasse, imposte\" + \"costo dei certificati di energia verde, fatturazione e distribuzione\", IVA incl.)"
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Prezzo dell'energia (\"uso della rete\" + \"oneri, tasse, imposte\" + \"costo dei certificati di energia verde, fatturazione e distribuzione\", IVA incl.)",
+    "Surcharge on the absolute market price (percent, e.g. 3 for aWATTar; 0 = none)": "Maggiorazione sul prezzo di mercato assoluto (percentuale, ad es. 3 per aWATTar; 0 = nessuna)",
+    "Fixed surcharge per kWh (cent, before VAT; 0 = none)": "Maggiorazione fissa per kWh (centesimi, IVA esclusa; 0 = nessuna)"
 }

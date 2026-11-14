@@ -4,5 +4,7 @@
     "Start Threshold Loading (e.g. for EV)": "Початок порогу завантаження (напр. для електромобіля)",
     "End Threshold Loading (e.g. for EV)": "Кінець порогу завантаження",
     "actual VAT rate (percent)": "поточна ставка ПДВ (відсоток)",
-    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Тариф на електроенергію (\"використання мережі\" + \"збори, платежі, податки\" + \"вартість сертифікатів зеленої енергії, білінгу та збуту\", з ПДВ)"
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Тариф на електроенергію (\"використання мережі\" + \"збори, платежі, податки\" + \"вартість сертифікатів зеленої енергії, білінгу та збуту\", з ПДВ)",
+    "Surcharge on the absolute market price (percent, e.g. 3 for aWATTar; 0 = none)": "Надбавка до абсолютної ринкової ціни (у відсотках, напр. 3 для aWATTar; 0 = немає)",
+    "Fixed surcharge per kWh (cent, before VAT; 0 = none)": "Фіксована надбавка за кВт·год (центи, до ПДВ; 0 = немає)"
 }

@@ -164,6 +164,8 @@
         "LoadingThresholdStart": "23:00",
         "LoadingThresholdEnd": "06:00",
         "MWstRate" : "19",
+        "absPriceFactor": "0",
+        "constantCosts": "0",
         "WorkRate" : "20,08"
     },
     "objects": [],

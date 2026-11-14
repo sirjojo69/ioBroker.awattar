@@ -4,5 +4,7 @@
     "Start Threshold Loading (e.g. for EV)": "Start laaddrempel (bijv. voor EV)",
     "End Threshold Loading (e.g. for EV)": "Einde laaddrempel",
     "actual VAT rate (percent)": "actueel btw-tarief (percentage)",
-    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Energietarief (\"netgebruik\" + \"heffingen, kosten, belastingen\" + \"kosten voor groene stroomcertificaten, facturatie en distributie\", incl. btw)"
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "Energietarief (\"netgebruik\" + \"heffingen, kosten, belastingen\" + \"kosten voor groene stroomcertificaten, facturatie en distributie\", incl. btw)",
+    "Surcharge on the absolute market price (percent, e.g. 3 for aWATTar; 0 = none)": "Toeslag op de absolute marktprijs (procent, bijv. 3 bij aWATTar; 0 = geen)",
+    "Fixed surcharge per kWh (cent, before VAT; 0 = none)": "Vaste toeslag per kWh (cent, vóór btw; 0 = geen)"
 }

@@ -4,5 +4,7 @@
     "Start Threshold Loading (e.g. for EV)": "开始充电阈值（例如用于电动车）",
     "End Threshold Loading (e.g. for EV)": "结束充电阈值",
     "actual VAT rate (percent)": "当前增值税税率（百分比）",
-    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "电价（“电网使用费”+“税费、摊派、税款”+“绿色电力证书、结算与配送成本”，含增值税）"
+    "Arbeitspreis ( \"Netznutzung\" + \"Umlagen, Abgaben, Steuern\" + \"Kosten für Ökostromzertifikate, Abrechnung und Vertrieb\", incl. MWSt.)": "电价（“电网使用费”+“税费、摊派、税款”+“绿色电力证书、结算与配送成本”，含增值税）",
+    "Surcharge on the absolute market price (percent, e.g. 3 for aWATTar; 0 = none)": "按绝对市场价格加收的附加费（百分比，如 aWATTar 为 3；0 = 无）",
+    "Fixed surcharge per kWh (cent, before VAT; 0 = none)": "每千瓦时固定附加费（欧分，不含增值税；0 = 无）"
 }

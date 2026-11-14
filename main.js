@@ -2,6 +2,17 @@
 const utils = require('@iobroker/adapter-core');
 const axios = require('axios').default;
 
+/**
+ * Reads a number from the settings; accepts a comma as decimal separator, empty or invalid input gives 0.
+ *
+ * @param {string | number | undefined} value value from the adapter settings
+ * @returns {number} the parsed number or 0
+ */
+function parseNumber(value) {
+    const num = parseFloat(String(value).replace(',', '.'));
+    return isNaN(num) ? 0 : num;
+}
+
 // data points of one price slot below "pricesOrdered.<n>" / "pricesOrderedTomorrow.<n>"
 const SLOT_STATES = [
     {
@@ -53,9 +64,12 @@ class Awattar extends utils.Adapter {
         // this.log.info("Loading Threshold End: " + this.config.LoadingThresholdEnd);
 
         const url = this.config.aWATTarApiUrl;
-        const mwst = parseInt(this.config.MWstRate);
+        const mwst = parseNumber(this.config.MWstRate);
         const mwstRate = (mwst + 100) / 100;
-        const workRate = parseFloat(String(this.config.WorkRate).replace(',', '.'));
+        const workRate = parseNumber(this.config.WorkRate);
+        //optional surcharges of the supplier, both default to 0 (= no effect)
+        const absPriceFactor = parseNumber(this.config.absPriceFactor) / 100; //percent of the absolute market price
+        const constantCosts = parseNumber(this.config.constantCosts); //cent / kWh, before VAT
         const loadingThresholdStart = this.config.LoadingThresholdStart;
         if (isNaN(parseInt(loadingThresholdStart))) {
             return this.log.error('loadingThresholdStart NaN');
@@ -233,6 +247,19 @@ class Awattar extends utils.Adapter {
                 native: {},
             });
 
+            await this.setObjectNotExistsAsync(`${stateBaseName}nettoFullPriceKwh`, {
+                type: 'state',
+                common: {
+                    name: 'Preis pro KWh (excl. MwSt., incl. Aufschlaege)',
+                    type: 'number',
+                    role: 'value',
+                    unit: 'Cent / KWh',
+                    read: true,
+                    write: false,
+                },
+                native: {},
+            });
+
             await this.setObjectNotExistsAsync(`${stateBaseName}bruttoPriceKwh`, {
                 type: 'state',
                 common: {
@@ -269,7 +296,9 @@ class Awattar extends utils.Adapter {
             const endTime = end.toLocaleTimeString('de-DE');
             const endDate = `${end.getDate().toString().padStart(2, '0')}.${(end.getMonth() + 1).toString().padStart(2, '0')}.${end.getFullYear()}`;
             const nettoPriceKwh = array[i].marketprice / 10; //price is in eur per MwH. Convert it in cent per KwH
-            const bruttoPriceKwh = nettoPriceKwh * mwstRate;
+            //surcharges are based on the absolute value, so negative prices still get a positive surcharge
+            const nettoFullPriceKwh = nettoPriceKwh + Math.abs(nettoPriceKwh) * absPriceFactor + constantCosts;
+            const bruttoPriceKwh = nettoFullPriceKwh * mwstRate;
             const totalPriceKwh = bruttoPriceKwh + workRate;
 
             //write prices / timestamps to their data points
@@ -281,6 +310,7 @@ class Awattar extends utils.Adapter {
                 this.setStateAsync(`${stateBaseName}endTimestamp`, endTs, true),
                 this.setStateAsync(`${stateBaseName}endDate`, endDate, true),
                 this.setStateAsync(`${stateBaseName}nettoPriceKwh`, nettoPriceKwh, true),
+                this.setStateAsync(`${stateBaseName}nettoFullPriceKwh`, nettoFullPriceKwh, true),
                 this.setStateAsync(`${stateBaseName}bruttoPriceKwh`, bruttoPriceKwh, true),
                 this.setStateAsync(`${stateBaseName}totalPriceKwh`, totalPriceKwh, true),
             ]);
