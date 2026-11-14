@@ -62,7 +62,7 @@ According to the <a href="https://www.awattar.de/services/api" target="_blank">a
     ### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### 1.6.0
 * New: optional settings "surcharge on the absolute market price (percent)" and "fixed surcharge per kWh (cent)" for suppliers like aWATTar (3 % procurement component since 09/2022, see #20); both default to 0. New data point `nettoFullPriceKwh`; `bruttoPriceKwh` and `totalPriceKwh` are based on it. Formula: `net full = net + |net| * percent/100 + fixed`, `gross = net full * (1 + VAT/100)`, `total = gross + energy rate`
 * Changed: the VAT rate now accepts decimals and a comma as decimal separator
 

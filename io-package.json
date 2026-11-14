@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "awattar",
-        "version": "1.5.0",
+        "version": "1.6.0",
         "tier": 3,
         "desc": {
             "en": "reads out hourly prices from aWATTar",
@@ -114,6 +114,19 @@
             "pl": "Interfejs administratora przeniesiony na jsonConfig; naprawiono: cena energii z przecinkiem dziesiętnym była obcinana (np. 20,08 jest teraz liczone jako 20,08 zamiast 20) - ceny całkowite mogą nieznacznie wzrosnąć",
             "uk": "Інтерфейс адміністратора переведено на jsonConfig; виправлено: робоча ціна з десятковою комою обрізалася (наприклад, 20,08 тепер враховується як 20,08, а не 20) — загальні ціни можуть трохи зрости",
             "zh-cn": "管理界面已迁移到 jsonConfig；修复：带小数逗号的电价被截断的问题（例如 20,08 现在按 20,08 计算，而不是 20）- 总价可能会略有上升"
+          },
+          "1.6.0": {
+            "en": "New optional settings for surcharges (percent of the absolute market price, fixed cent per kWh) with the new data point nettoFullPriceKwh; the VAT rate now accepts decimals",
+            "de": "Neue optionale Einstellungen für Aufschläge (Prozent vom absoluten Börsenpreis, fester Cent-Betrag pro kWh) mit dem neuen Datenpunkt nettoFullPriceKwh; der MwSt.-Satz akzeptiert jetzt Dezimalstellen",
+            "ru": "Новые необязательные настройки надбавок (процент от абсолютной рыночной цены, фиксированная сумма в центах за кВт·ч) с новым объектом nettoFullPriceKwh; ставка НДС теперь допускает десятичные дроби",
+            "pt": "Novas definições opcionais para acréscimos (percentagem do preço de mercado absoluto, valor fixo em cêntimos por kWh) com o novo ponto de dados nettoFullPriceKwh; a taxa de IVA aceita agora casas decimais",
+            "nl": "Nieuwe optionele instellingen voor toeslagen (percentage van de absolute marktprijs, vast bedrag in cent per kWh) met het nieuwe datapunt nettoFullPriceKwh; het btw-tarief accepteert nu decimalen",
+            "fr": "Nouveaux paramètres facultatifs pour les majorations (pourcentage du prix de marché absolu, montant fixe en centimes par kWh) avec le nouveau point de données nettoFullPriceKwh ; le taux de TVA accepte désormais les décimales",
+            "it": "Nuove impostazioni facoltative per le maggiorazioni (percentuale del prezzo di mercato assoluto, importo fisso in centesimi per kWh) con il nuovo punto dati nettoFullPriceKwh; l'aliquota IVA ora accetta i decimali",
+            "es": "Nuevos ajustes opcionales para recargos (porcentaje del precio de mercado absoluto, importe fijo en céntimos por kWh) con el nuevo punto de datos nettoFullPriceKwh; el tipo de IVA ahora admite decimales",
+            "pl": "Nowe opcjonalne ustawienia narzutów (procent bezwzględnej ceny rynkowej, stała kwota w centach za kWh) z nowym punktem danych nettoFullPriceKwh; stawka VAT akceptuje teraz wartości dziesiętne",
+            "uk": "Нові необов'язкові налаштування надбавок (відсоток від абсолютної ринкової ціни, фіксована сума в центах за кВт·год) з новим об'єктом nettoFullPriceKwh; ставка ПДВ тепер допускає десяткові дроби",
+            "zh-cn": "新增可选的附加费设置（绝对市场价格的百分比、每千瓦时固定欧分金额）及新数据点 nettoFullPriceKwh；增值税率现在支持小数"
           },
           "1.5.0": {
             "en": "New folder pricesOrderedTomorrow with all hours of tomorrow sorted by price; fixed: the last hour of the configured period was missing in pricesOrdered (e.g. 05:00-06:00 for an end time of 06:00) - the period now contains one more hour than before",
